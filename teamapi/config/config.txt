@@ -1,0 +1,23 @@
+<?php
+/**
+*Autoloader function
+*auto loads classes from the classes folder
+*prevents the need for imports when calling classes from other files 
+*@param className : auto passed in by php when attempting to reference a class from *a file
+*/
+function autoloadClasses($className) {
+ #create the full path to the class, double slash to escape 
+ $filename = "classes\\" . strtolower($className) . ".class.php";
+ #replace double slash with the directory seperator of current OS
+ $filename = str_replace('\\', DIRECTORY_SEPARATOR, $filename);
+ if (is_readable($filename)) {
+   include_once $filename;
+ } else {
+   #exit("File not found: " . $className . " (" . $filename . ")"); changing to throw error isnstead of dying
+   throw new exception("FILE NOT FOUND: " .$className . " (". $filename . ")" );
+ }
+
+}
+spl_autoload_register("autoloadClasses");
+
+?>

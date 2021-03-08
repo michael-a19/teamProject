@@ -1,0 +1,7 @@
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php 
+ErrorDocument 403 /teamproject/teamapi/error/
+ErrorDocument 500 /teamproject/teamapi/error/
+
