@@ -24,8 +24,9 @@ class Router {
         $path = (empty($pathArr[0])) ? "main" : $pathArr[0]; 
 
         //when requesting data from the api the path will be www.example.com/api/whateverDataWeWant so the pathArr[0] will be 'api' we check for that here and call the appropriate method 
-        ($path == 'api') ? $this->apiRoute($pathArr, $recordSet) : $this->htmlRoute($path); #if path is api then call apiRoute else call htmlRoute
-
+        ($path == 'api') ? $this->apiRoute($pathArr, $recordSet) : $this->htmlRoute($path, $pathArr); #if path is api then call apiRoute else call htmlRoute
+        //if the first one is not api then go to html so pass path and patharr to html
+        #don't need to pass $path to html
     }
 
     /**
@@ -33,12 +34,22 @@ class Router {
      */
     public function apiRoute($pathArr, $recordSet) {
         $this->page = new JSONPage($pathArr, $recordSet);
-        $this->type = 'JSON';
+        #$this->type = 'JSON';
        //echo("json called");
     }
 
-    public function htmlRoute($path){
+    public function htmlRoute($path, $pathArr){
         //todo create the part to create an html page, will be important to create some api documentation. 
+        #$ini['routes'] = parse_ini_file("config/routes.ini", true); #get the stuff in that ini file (page routes) 
+  # $pageInfo = isset($path, $ini['routes'][$path]) #check if both set
+  # ? $ini['routes'][$path] #if path is set and that exists in the array of route shit from ini file then set to that path 
+   #: $ini['routes']['error']; #if not set to error, means no empty handling any more? 
+ 
+#bottom part only 
+        $this->page = new HTMLPage($path, $pathArr);
+
+       # $this->page = new WebPageWithNav($pageInfo['title'], $pageInfo['heading1'], $pageInfo['footer']);
+  #$this->page->addToBody($pageInfo['text']);
     }
 
     /**

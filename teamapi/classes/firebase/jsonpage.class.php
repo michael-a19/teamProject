@@ -25,11 +25,6 @@ class JSONPage {
             case 'students':
                 $this->page = $this->getStudentExample();
                 break;
-                case 'timetable':
-                    $json['status'] ="900000000";
-                    $json['message'] = "this is a message ";
-                    $this->page = json_encode($json);
-    break;
             default:
                 $this->page = $this->json_error(); #if the path is not correct then error is returned 
                 break; 
@@ -91,7 +86,7 @@ class JSONPage {
 
                             $json['status'] = '200';
                             $json['message'] ='login successful'; 
-                            $json['name'] = $result[0]['user_fName'].' '.$result[0]['user_lName'];
+                            $json['name'] = $result[0]['user_fName'];
                             $token['iat'] = time(); #time the token is created 
                             $token['exp'] = time() + 3600; #expires an hour after being created 
                             $token['email'] = $input->email;
