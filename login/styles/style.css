@@ -1,0 +1,428 @@
+:root {
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    --text-primary: #b6b6b6;
+    --text-secondary: #ececec;
+    --bg-primary: #23232e;
+    --bg-secondary: #141418;
+    --transition-speed: 200ms; 
+}
+html, body {
+    
+    font-size: 16px;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+body {
+    color: black;
+    background-color: white;   
+}
+
+* {
+    box-sizing: content-box;
+}
+
+body {
+    width: 100%;
+    font-family: 'Mukta', sans-serif;
+}  
+
+/* styling for the scroll bar on screen */
+body::-webkit-scrollbar {
+    width: 0.3rem;
+}
+body::-webkit-scrollbar-track {
+    background: #1e1e24;
+}
+body::-webkit-scrollbar-thumb {
+    background: #6649b8;
+}
+/*end of scroll bar styling */
+
+/* error banner styling  for login and create account pages */
+#error-banner{
+    width: 100%; 
+    min-height: 60px;
+    background-color: rgba(255, 0, 0, 0.74); 
+    font-size: 1.2rem;
+    padding:0;
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#error-message {
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+/* this page container is used for the login and create account pages */ 
+#page-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100%;
+    align-items: center;
+}
+
+/*page banner styling*/
+#page-banner {
+    width: 100%;
+    height: 5rem;
+    top: 0;
+    position: fixed;
+    background-color: var(--bg-primary);
+    color: white;
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+#banner-left-container {
+    border: solid 1px black;
+    display: flex; 
+    flex-direction: row; 
+    /* justify-content: space-between; */
+    align-items: center;
+    margin-left: 10px;
+}
+
+#logo-container {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center; 
+    border-radius: 50%; 
+    margin-left: 16rem;
+}
+
+#logo {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center; 
+    border-radius: 5px; 
+    
+}
+
+/* right side styling  */
+#banner-right {
+    /* border: solid 1px black; */
+    min-width: 300px;
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+} 
+
+#banner-dropdown-container {
+    /* border: solid 1px black; */
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    position: relative; /* set the position relative to position the drop down menu to absolute relative to this */
+
+}
+
+
+/*style the banner drop down button */ 
+#banner-dropdown-button {
+    background-color: #777777;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    width: 200px;
+    border-radius: 5px;
+}
+#banner-dropdown-button:hover {
+    background-color:#616161;
+}
+
+#dropdown-visibility { /* this containers display is toggeled on off hiding or showing the content of the menu*/
+    display: none;
+    position: absolute;
+    left: -50px;
+    top:62px;
+    
+    min-width: 160px;
+    
+    z-index: 1;
+} 
+
+#dropdown-content { /*container for the drop down content */
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+   
+    background-color: #cfcfcf;
+}
+
+.banner-dropdown-item {
+    text-decoration: none;
+    text-align: center; 
+    padding: 10px 0;
+    border-bottom: 1px solid grey;
+    color: black;
+    font-weight: bold;
+
+}
+
+
+/* Change color of dropdown links on hover */
+.banner-dropdown-item:hover {background-color: #ddd;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+#banner-dropdown-container:hover .banner-dropdown-button {background-color: #3e8e41;}
+
+/*end of banner styling */
+
+/* styling for navigation bar (vertical to left) */
+
+.navbar {
+    width: 5rem; /*80 pixels wide, also matches the margin of main on left*/
+    height: 100%;
+    position: fixed; 
+    background-color: var(--bg-primary);
+    transition: 200ms ease;
+    z-index: 400;
+    top:0;
+    overflow: hidden;
+    
+}
+
+.navbar-nav {
+    list-style: none;
+    padding: 0; 
+    margin: 0; 
+    display: flex;
+    flex-direction : column;
+    /* justify-content:; */
+    align-items:center;
+    height: 100%;
+}
+
+.nav-item {
+    width: 100%;
+    
+
+}
+.nav-item:last-child {
+    margin-top: auto;
+}
+
+.nav-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    height: 5rem; /*same as width making each link square*/
+    text-decoration: none; 
+    color: var(--text-primary);
+    filter: grayscale(100%) opacity(0.7);
+    transition: var(--transition-speed);
+    
+    
+}
+.nav-link:hover {
+    filter: grayscale(0%) opacity(1);
+    color: var(--text-secondary);
+    background-color: var(--bg-secondary);
+}
+.nav-link .nav-img {
+    border-radius: 50%;
+}
+.nav-link:hover .nav-img {
+    background-color: #ff7eee;
+    border-radius: 50%;
+    /* box-shadow:          0 0 10px #ff7eee; */
+    /* #df49a6 */
+}
+
+
+.nav-link img {
+    width: 2rem; /*set icon size*/
+    margin: 0 1.5rem;
+}
+
+.navbar:hover {
+    width: 16rem;
+}
+
+.navbar:hover .link-text {
+    display: block;
+}
+
+/* .nav-img:hover {
+    background-color: #ff7eee;
+    border-radius: 50%;
+    /* #df49a6 */
+
+.nav-img {
+    transition: var(--transition-speed);
+}
+.menu-icon {
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+    background-color: #ff7eee7a;
+    width: 100%;
+    
+    font-weight: bold;
+    text-transform: uppercase; 
+    margin-bottom: 1rem;
+
+    /* font-size: 1.5rem; 
+    letter-spacing: 0.3ch; */
+    
+}
+
+.link-text {
+    display: none;
+    margin-left: 1rem;
+    left: -999px;
+    transition: var(--transition-speed);
+   
+}
+/* .burger-img {
+    transform: rotate(0deg);
+    transition: transform var(--transition-speed);
+
+}
+ .menu-icon:hover .burger-img {
+    transform: rotate(-180deg);
+}  */
+.menu-icon:hover .nav-link{
+    background-color: #ff7eee; /*#ff7eee7a;*/
+    color: var(--bg-secondary);
+    font-weight:bold;
+    
+}
+
+/* end of navigation bar styling */
+
+
+
+#form-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    
+}
+.background2{
+    background-color: #cfcfcf;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg stroke='%23000000' stroke-width='0' stroke-opacity='0' %3E%3Ccircle fill='%23cfcfcf' cx='0' cy='0' r='1800'/%3E%3Ccircle fill='%23c2c2c2' cx='0' cy='0' r='1700'/%3E%3Ccircle fill='%23b5b5b5' cx='0' cy='0' r='1600'/%3E%3Ccircle fill='%23a8a8a9' cx='0' cy='0' r='1500'/%3E%3Ccircle fill='%239c9b9d' cx='0' cy='0' r='1400'/%3E%3Ccircle fill='%238f8f90' cx='0' cy='0' r='1300'/%3E%3Ccircle fill='%23838284' cx='0' cy='0' r='1200'/%3E%3Ccircle fill='%23777679' cx='0' cy='0' r='1100'/%3E%3Ccircle fill='%236b6a6d' cx='0' cy='0' r='1000'/%3E%3Ccircle fill='%23605f62' cx='0' cy='0' r='900'/%3E%3Ccircle fill='%23545356' cx='0' cy='0' r='800'/%3E%3Ccircle fill='%2349484c' cx='0' cy='0' r='700'/%3E%3Ccircle fill='%233e3d41' cx='0' cy='0' r='600'/%3E%3Ccircle fill='%23343337' cx='0' cy='0' r='500'/%3E%3Ccircle fill='%232a282c' cx='0' cy='0' r='400'/%3E%3Ccircle fill='%23201e23' cx='0' cy='0' r='300'/%3E%3Ccircle fill='%23161519' cx='0' cy='0' r='200'/%3E%3Ccircle fill='%230a070f' cx='0' cy='0' r='100'/%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: cover;
+    align-items: center;
+}
+.background1 {
+    background-color: #000000;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg %3E%3Cpolygon fill='%23222222' points='800 100 0 200 0 800 1600 800 1600 200'/%3E%3Cpolygon fill='%23444444' points='800 200 0 400 0 800 1600 800 1600 400'/%3E%3Cpolygon fill='%23666666' points='800 300 0 600 0 800 1600 800 1600 600'/%3E%3Cpolygon fill='%23888888' points='1600 800 800 400 0 800'/%3E%3Cpolygon fill='%23aaaaaa' points='1280 800 800 500 320 800'/%3E%3Cpolygon fill='%23cccccc' points='533.3 800 1066.7 800 800 600'/%3E%3Cpolygon fill='%23EEE' points='684.1 800 914.3 800 800 700'/%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: cover;
+    align-items: center;
+}
+
+
+#account-form {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    background-color:#ffffff94;
+    color: #17202A;
+    border-radius: 25px;
+    min-height: 600px;
+    box-shadow: 0 10px 10px -5px;
+    
+}
+
+.reg-item {
+    height: 3rem;
+    width: 90%;
+    padding-left: 10px;
+    border-radius: 10px;
+    border: #34475e 1px solid;
+    font-size: 1.5rem;
+   
+}
+
+#form-button{
+    
+    margin-top: 15px;
+    color: white; 
+    background-color: #17202A ;
+    height: 60px;
+    width: 90%;
+    border-radius: 10px;
+    font-size: 1.3rem;
+}
+#form-button:hover{
+    
+    background-color: #2e4055 
+}
+
+
+.label {
+    width: 90%;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding:0;
+    margin:0;
+
+}
+.label:first-child {
+    margin-top: 10px;
+}
+
+#register-account { /*rename bottom link and in css file for both login and register */
+    text-decoration: none;
+    font-size: 1.3rem;
+    color: #17202A ;
+    margin-bottom: 10px;
+}
+
+#register-account:hover{
+    color: #0c1927;
+    border-bottom: 1px solid  #0c1927;
+    margin-bottom:9px;
+}
+
+#main-heading{
+    color: white;
+    margin-top: 5rem;
+    
+}
+
+main {
+    margin-left: 5rem; /*this margin will prevent the main content overlapping the nav sidebar. REM is a size relatvie to the font size on the root element which we set to 16*/
+    /*so rem is 5 and root font size is 16 so 16*5 = 80px */
+    padding: 1rem;
+    margin-top: 5rem;
+    height: 100%;
+
+}
+
+
+
+
+@media only screen and (max-width: 600px) {
+    #account-form { 
+        width: 100%;
+        border: none;
+        border-radius: 0;
+    }
+}
+
