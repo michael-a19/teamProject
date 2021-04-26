@@ -12,33 +12,17 @@ function getConnection()
     }
 }
 
-function getMonthEvents()
+function getDayClasses($dbConn, $date)
 {
-
-}
-
-function getWeekEvents($dbConn, $weekStartingDate)
-{
-    $weekEvents = [];
-    for ($i = 0; $i < 7; $i++)
-    {
-        $weekEvents[$i] = getDayEvents($dbConn, $weekStartingDate);
-        $weekStartingDate = strtotime("+1 day", $weekStartingDate);
-    }
-    return $weekEvents;
-}
-
-function getDayEvents($dbConn, $date)
-{
-    // SQL query that retrieves the basic data for each event on the given day
-    $sqlQuery = "SELECT event_desc, scheduled_event_start_time, scheduled_event_end_time, scheduled_event_date, subject_name, event_type, scheduled_event_id
-		FROM tp_event
-		INNER JOIN tp_scheduled_events
-		ON tp_event.event_id = tp_scheduled_events.event_id
+    // SQL query that retrieves the basic data for each class on the given day
+    $sqlQuery = "SELECT class_desc, scheduled_class_start_time, scheduled_class_end_time, scheduled_class_date, subject_name, scheduled_class_id
+		FROM tp_class
+		INNER JOIN tp_scheduled_classes
+		ON tp_class.class_id = tp_scheduled_classes.class_id
 		INNER JOIN tp_subject
-		ON tp_event.subject_id = tp_subject.subject_id
-		WHERE tp_scheduled_events.scheduled_event_date = :date
-		ORDER BY scheduled_event_start_time";
+		ON tp_class.subject_id = tp_subject.subject_id
+		WHERE tp_scheduled_classes.scheduled_class_date = :date
+		ORDER BY scheduled_class_start_time";
     // Prepare the sql statement using PDO
     $stmt = $dbConn->prepare($sqlQuery);
 
@@ -46,15 +30,44 @@ function getDayEvents($dbConn, $date)
     $stmt->execute(array(':date' => $date));
 
     // Store data retrieved in an array
-    $dayEvents = array();
+    $dayClasses = array();
     $i = 0;
 
     while ($rowObj = $stmt->fetchObject()) {
-        $dayEvents[$i] = new Event($rowObj->event_desc, $rowObj->scheduled_event_start_time, $rowObj->scheduled_event_end_time,
-            $rowObj->scheduled_event_date, $rowObj->subject_name, $rowObj->event_type, $rowObj->scheduled_event_id);
+        $dayClasses[$i] = new Event($rowObj->class_desc, $rowObj->scheduled_class_start_time, $rowObj->scheduled_class_end_time,
+            $rowObj->scheduled_class_date, $rowObj->subject_name, "class", $rowObj->scheduled_class_id);
         $i++;
     }
-    return $dayEvents;
+    return $dayClasses;
+}
+
+function getDayMeetings($dbConn, $date)
+{
+    // SQL query that retrieves the basic data for each meeting on the given day
+    $sqlQuery = "SELECT meeting_desc, scheduled_meeting_start_time, scheduled_meeting_end_time, scheduled_meeting_date, subject_name, scheduled_meeting_id
+		FROM tp_meeting
+		INNER JOIN tp_scheduled_meetings
+		ON tp_meeting.meeting_id = tp_scheduled_meetings.meeting_id
+		INNER JOIN tp_subject
+		ON tp_meeting.subject_id = tp_subject.subject_id
+		WHERE tp_scheduled_meetings.scheduled_meeting_date = :date
+		ORDER BY scheduled_meeting_start_time";
+    // Prepare the sql statement using PDO
+    $stmt = $dbConn->prepare($sqlQuery);
+
+    // Execute the query using PDO
+    $stmt->execute(array(':date' => $date));
+
+    // Store data retrieved in an array
+    $dayMeetings = array();
+    $i = 0;
+
+    while ($rowObj = $stmt->fetchObject()) {
+        $dayMeetings[$i] = new Event($rowObj->meeting_desc, $rowObj->scheduled_meeting_start_time, $rowObj->scheduled_meeting_end_time,
+            $rowObj->scheduled_meeting_date, $rowObj->subject_name, "meeting", $rowObj->scheduled_meeting_id);
+        $i++;
+    }
+    return $dayMeetings;
 }
 
 function displayDayColumn()
@@ -76,7 +89,8 @@ function displayDayEvents($date)
     {
         $dbConn = getConnection();
 
-        $events = getDayEvents($dbConn, $date);
+        $events = array_merge(getDayClasses($dbConn, $date), getDayMeetings($dbConn, $date));
+
         for ($i = 0; $i < sizeof($events); $i++)
             {
                 $startTime = 60 * (int)date('H', strtotime($events[$i]->start_time)) + (int)date('i', strtotime($events[$i]->start_time));
@@ -89,11 +103,6 @@ function displayDayEvents($date)
     catch (Exception $e){
         echo "<p>Query failed: ".$e->getMessage()."</p>\n";
     }
-}
-
-function displayWeekEvents($startingDate)
-{
-
 }
 
 function timeToPercentage($time)
@@ -142,6 +151,36 @@ function displayUpcomingDeadlines()
         for ($i = 0; $i < sizeof($deadlines); $i++)
         {
             echo "<p class=\"deadline\" >".$deadlines[$i]->desc." ".$deadlines[$i]->date." ".$deadlines[$i]->time."</p>\n";
+        }
+    }
+    catch (Exception $e){
+        echo "<p>Query failed: ".$e->getMessage()."</p>\n";
+    }
+}
+
+function displaySubjectSelectOptions($default)
+{
+    try
+    {
+        $dbConn = getConnection();
+
+        $sqlQuery = "SELECT subject_name, subject_id
+		FROM tp_subject
+		ORDER BY subject_name";
+        // Prepare the sql statement using PDO
+        $stmt = $dbConn->prepare($sqlQuery);
+
+        // Execute the query using PDO
+        $stmt->execute();
+
+        while ($rowObj = $stmt->fetchObject()) {
+            if ($default == $rowObj->subject_id)
+            {
+                echo "<option value=\"".$rowObj->subject_id."\" selected=\"selected\">".$rowObj->subject_name." </option>\n";
+            }
+            else {
+                echo "<option value=\"".$rowObj->subject_id."\">".$rowObj->subject_name."</option>\n";
+            }
         }
     }
     catch (Exception $e){

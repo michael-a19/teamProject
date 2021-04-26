@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <title>Planner</title>
     <link href="style.css" rel="stylesheet" type="text/css">
+    <script src="plannerJSFunctions.js"></script>
 </head>
 <body>
 <?php
 require_once('functions.php');
 include('Event.php');
 include('Deadline.php');
-//$weekEvents = getWeekEvents();
+
 $date = filter_has_var(INPUT_GET, 'date')
     ? $_GET['date'] : date("Y-m-d");
 $unixDate = strtotime($date);
@@ -37,17 +38,19 @@ for ($i = 1; $i < 7; $i++)
     <div class="planner">
         <div class="planner-header">
             <div class="dropdown">
-                <button onclick="toggleViewDropDown()" class="dropbtn">Dropdown</button>
+                <button onclick="toggleViewDropDown()" class="dropbtn">Week</button>
                 <div id="view-btn" class="dropdown-content">
-                    <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
+                    <?php
+                    echo "<a href=\"plannerDay.php?date=".$date."\">Day</a>";
+                    echo "<a href=\"plannerWeek.php?date=".$date."\">Week</a>";
+                    echo "<a href=\"#\">Month</a>";
+                    ?>
                 </div>
             </div>
             <?php
-            echo "<button onclick=\"changeWeek('".date("Y-m-d", strtotime("-1 week", $days[0]))."')\" class=\"backWeek\">&#9664;</button>\n";
-            echo "<h1>".date("D", $days[0])." ".date("d/m/Y", $days[0])." - ".date("D", $days[6])." ".date("d/m/Y", $days[6])."</h1>\n";
-            echo "<button onclick=\"changeWeek('".date("Y-m-d", strtotime("+1 week", $days[0]))."')\" class=\"forwardWeek\">&#9654;</button>\n";
+            echo "<button onclick=\"changeDate('".date("Y-m-d", strtotime("-1 week", $days[0]))."')\" class=\"backWeek\">&#9664;</button>\n";
+            echo "<h1>".date("D d/m/Y", $days[0])." - ".date("D d/m/Y", $days[6])."</h1>\n";
+            echo "<button onclick=\"changeDate('".date("Y-m-d", strtotime("+1 week", $days[0]))."')\" class=\"forwardWeek\">&#9654;</button>\n";
             ?>
             <div class="dropdown">
                 <button onclick="toggleShowDropdown()" class="dropbtn">Dropdown</button>
@@ -172,37 +175,4 @@ for ($i = 1; $i < 7; $i++)
         ?>
     </div>
 </div>
-<script>
-    /* When the user clicks on the button,
-    toggle between hiding and showing the dropdown content */
-    function toggleViewDropDown() {
-        document.getElementById("view-btn").classList.toggle("show");
-    }
-
-    function toggleShowDropdown()
-    {
-        document.getElementById("show-btn").classList.toggle("show");
-    }
-
-    // Close the dropdown if the user clicks outside of it
-    window.onclick = function(event) {
-        if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-            }
-        }
-    }
-
-    function changeWeek(date)
-    {
-        var searchParams = new URLSearchParams(window.location.search);
-        searchParams.set("date", date);
-        window.location.search = searchParams.toString();
-    }
-</script>
 </body>
