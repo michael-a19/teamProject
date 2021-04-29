@@ -2,27 +2,27 @@
 
     session_start(); 
     include_once('./includes/pagefunctions.inc.php');
-    //if the logged in session variable doesn't not exist or if the variable is true user is not logged in
-    if(!isset($_SESSION['loggedIn']) || !($_SESSION['loggedIn'])) 
-    {
-        header('location: login.php');
-    }
-    //print_r($_SESSION);
-    //echo "page works";
-
-    echo pageStart('Home', "./styles/style.css");
-    //echo pageBanner(); move this banner into page banner and conditionally load the content, just keep logo if not logged in
+    include_once('./includes/functions.inc.php');
+    
+    checkLoggedIn();
+    //create page start
+    echo pageStart('Home',""); ///////////////////change
+   
     echo createNav();
-echo createBanner();
-echo "<main>";
-    //main content for the page would be displayed here
+    echo createBanner();
+    
+   
 ?>
+<main>
+    
 
+</main>
+<!-- <div id="home-schedule"> -->
+<!-- add the schedule here -->
 
+<!-- </div> -->
 
-<?php
-    echo "</main>"
-?>
+        <!-- </main> -->
 
 <script>
 //wrap in onload event to prevent from loading before page finishes 

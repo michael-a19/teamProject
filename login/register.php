@@ -1,8 +1,8 @@
 <?php
     session_start(); 
 
-    if(isset($_SESSION['loggedIn'])&&$_SESSION['loggedIn'] == True){
-        //redirect to homepage
+    if( isset($_SESSION['user_id']) ){
+        //redirect to homepage if already logged in
         header('location: ./index.php');
     }
 
@@ -12,7 +12,7 @@
 
     echo pageStart("Login", "./styles/style.css");
     echo createBanner();
-    echo '<div id="page-container" class="background1">'; 
+    echo '<main class="background1">'; 
     echo generateFormError();
 ?>
     <div id="main-heading">
@@ -50,7 +50,7 @@
             </form>
                     
         </div>
-    </div>
+</main>
 
     <script>
         //validate stuff trim and that 

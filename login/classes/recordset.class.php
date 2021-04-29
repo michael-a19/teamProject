@@ -4,9 +4,8 @@
     class RecordSet {
         private $conn;
         private $stmt;
-        //create the db connection here and shit and pass in 
-        public function __construct($dbname){
-            $this->conn = DBConn::getConnection($dbname);
+        public function __construct(){
+            $this->conn = DBConn::getConnection();
         }
         
         //method for setting, getting, deleting etc spereate functions, delete return number of rows effected 

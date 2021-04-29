@@ -1,22 +1,22 @@
 <?php
     session_start();
+    //include database connection object 
+    include_once('../classes/recordset.class.php');
+    include_once("../includes/functions.inc.php");
 
     //check if user is already logged in, if so send to homepage
-    if(isset($_SESSION['loggedIn'])&&$_SESSION['loggedIn'] == True){
+    if(isset($_SESSION['user_id'])){
         //redirect to homepage
         header('location: ../index.php');
     }
-    //include database connection object 
-    include_once('../classes/recordset.class.php');
 
     $error = "";//empty array to hold errors
     $data = array(); //empty array to hold input from form
 
-
     //check if the form has been submitted
     if($_SERVER["REQUEST_METHOD"] == "POST")
     { 
-        $recset = new RecordSet("../logindb.sqlite");
+        $recset = new RecordSet();
         /* validate user input */
         
         //check if each variable is set and asssign to local variables
@@ -81,7 +81,7 @@
         //check if password is empty if not then validate it 
         if(!empty($data['password']))
         {
-            //DOES PASSWORD2 NEED TO BE SANITISED TOO? IT ISNT BEING USED ANYHERE, PROBABLY DOES 
+            
             if($data['password'] != $data['password2'])
             {
                 $error .= "passwords do not match. <br>";
@@ -95,49 +95,60 @@
         {
             $error .= "Password must not be empty<br>";
         }
-
-        $data['type']     = 'Teacher'; //only teachers can add students, so reg students will be inside website (add to class or somethuing)
         
         //if no errors then create account
         if(empty($error))
         {   
-            //check if user account exists first 
-            $checkQuery ="select count(*) from users where users.email = :email"; 
+            //check if user account already exists 
+            $checkQuery ="SELECT tp_users.user_forename FROM tp_users WHERE tp_users.user_email = :email"; 
             $checkParam['email'] = $data['email'];
-            $checkRes = $recset->getRecordSet($checkQuery,$checkParam); 
-            if($checkRes < 1) #is array do the same 
+
+            $checkRes = $recset->getRecordSet($checkQuery,$checkParam);
+            $checkRes = $checkRes[0];
+            if(count($checkRes) < 1) //if no results create user, if results are found return error
             {
-                //generate hashed password 
-                $error .= "That email is already registered, try logging in. <br/>";
-            } //check how to count
-            else
-            {
+                //hash user password
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-                $query = "insert into users ( fname, lname, email, type ,password) 
-                        values ( :fname, :lname, :email, :type ,:password)";
+
+                $query = "insert into tp_users ( user_forename, user_surname, user_email, user_type_id ,user_password,user_year_group, user_online_status ) 
+                        values ( :fname, :lname, :email, :type ,:password, :yeargroup, :onlinestatus)";
                 //make email lowercase 
-                $data['email'] = strtolower($data['email']);
+                $data['email'] = strtolower($data['email']); 
                 //set query parameters 
-                $params= array('fname'=>$data['fname'], 'lname'=>$data['lname'], 'email'=>$data['email'], 'type'=>$data['type'] ,'password'=>$data['password']);
-                
+                $params = array();
+                $params['fname']        = $data['fname'];
+                $params['lname']        = $data['lname'];
+                $params['email']        = $data['email'];
+                $params['type']         = 2;
+                $params['password']     = $data['password'];
+                $params['yeargroup']    = 0;
+                $params['onlinestatus'] = 0;
                 try 
                 {
                     //post to database
                     $res = $recset->writeToDB($query, $params);
                     //if successful relocate to the login form 
-                    $_SESSION['createdAccount'] = "Your account was created successfully<br> Please Login";
+                    
                     header("location: ../login.php");
                     //prevent code below being ran after redirect which may override this redirect
-                    exit();
+                    die();
                 }
                 catch(Exception $e)
                 {
                     $error .= "Internal Error " . $e->getMessage() . "</br>";
                 }
+
+
+
+              
+            } 
+            else //no results found proceed to create account
+            {
+                $error .= "That email is already registered, try logging in. <br/>";
                 
-            }//h
+            }
         }
-    }//oo
+    }
     else
     {
         //if request method is not post then acess to script did not come from form
@@ -150,11 +161,4 @@
 
 
 
-//put in own file with other functions 
-function validateInput($input)
-{
-	$input = trim($input);
-	$input = stripslashes($input); 
-	$input = htmlspecialchars($input);
-	return $input;
-}
+

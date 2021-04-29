@@ -6,27 +6,40 @@
     --bg-primary: #23232e;
     --bg-secondary: #141418;
     --transition-speed: 200ms; 
+    font-size: 16px;
+
+
 }
 html, body {
     
-    font-size: 16px;
+    
     height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+#notifcation-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; 
+    min-height: 50px; 
+    background-color:rgb(152, 243, 124);
+    font-weight: bold;
+    color:rgb(107, 107, 107);
+    font-size: 1.2rem;
     padding: 0;
     margin: 0;
 }
 body {
     color: black;
-    background-color: white;   
+    background-color: rgb(187, 184, 184);   
+    font-family: 'Mukta', sans-serif;
 }
 
 * {
-    box-sizing: content-box;
+    box-sizing: border-box;
 }
-
-body {
-    width: 100%;
-    font-family: 'Mukta', sans-serif;
-}  
 
 /* styling for the scroll bar on screen */
 body::-webkit-scrollbar {
@@ -40,14 +53,19 @@ body::-webkit-scrollbar-thumb {
 }
 /*end of scroll bar styling */
 
+/*container that goes around all content on the page */
+#full-page-container{
+    width: 100%;
+    height: 100%;
+}
 /* error banner styling  for login and create account pages */
 #error-banner{
     width: 100%; 
     min-height: 60px;
     background-color: rgba(255, 0, 0, 0.74); 
     font-size: 1.2rem;
-    padding:0;
-    margin-top: 5rem;
+    padding: 0;
+    margin:0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,19 +77,20 @@ body::-webkit-scrollbar-thumb {
     text-align: center;
     font-weight: bold;
 }
-/* this page container is used for the login and create account pages */ 
-#page-container {
+/* this page container is used for the login and create account pages d
+#page-container { 
     display: flex;
     flex-direction: column;
     width: 100%;
     min-height: 100%;
     align-items: center;
-}
+} */
 
 /*page banner styling*/
 #page-banner {
     width: 100%;
     height: 5rem;
+    min-height: 80px;
     top: 0;
     position: fixed;
     background-color: var(--bg-primary);
@@ -80,11 +99,14 @@ body::-webkit-scrollbar-thumb {
     flex-direction: row; 
     justify-content: space-between;
     align-items: center;
+    z-index: 200; /***this one**/
     
 }
-
+.move-left{
+    margin-left: -5rem;
+}
 #banner-left-container {
-    border: solid 1px black;
+    /* border: solid 1px black; */
     display: flex; 
     flex-direction: row; 
     /* justify-content: space-between; */
@@ -119,6 +141,7 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
     align-items: center;
     margin-right: 20px;
+    /* z-index:200; */
 } 
 
 #banner-dropdown-container {
@@ -128,9 +151,17 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
     align-items: center;
     position: relative; /* set the position relative to position the drop down menu to absolute relative to this */
-
+    border: solid black 2px;
+    margin: 0;
+    /* z-index:200; */
+    
 }
 
+#banner-dropdown-container:hover #dropdown-visibility {
+    
+    display: block;
+    /* z-index:200; */
+}
 
 /*style the banner drop down button */ 
 #banner-dropdown-button {
@@ -141,6 +172,7 @@ body::-webkit-scrollbar-thumb {
     border: none;
     width: 200px;
     border-radius: 5px;
+    /* z-index:200; */
 }
 #banner-dropdown-button:hover {
     background-color:#616161;
@@ -150,22 +182,34 @@ body::-webkit-scrollbar-thumb {
     display: none;
     position: absolute;
     left: -50px;
-    top:62px;
+    top:53px;
+    margin: 0;
+    min-width: 160px; /* make same width as the button, make button not a button */
     
-    min-width: 160px;
-    
-    z-index: 1;
+    /* z-index: 400; *************************************************** */
 } 
+
+
+
 
 #dropdown-content { /*container for the drop down content */
     display: flex;
     flex-direction: column;
     width: 300px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-   
+    /* z-index:400; */
     background-color: #cfcfcf;
 }
+.banner-dropdown-title {
+    text-align: center; 
+    padding: 10px 0;
+    border-bottom: 1px solid grey;
+    color: black;
+    font-weight: bold;
+    font-size: 1.3rem;
+    /* z-index:400; */
 
+}
 .banner-dropdown-item {
     text-decoration: none;
     text-align: center; 
@@ -173,6 +217,7 @@ body::-webkit-scrollbar-thumb {
     border-bottom: 1px solid grey;
     color: black;
     font-weight: bold;
+    /* z-index:400; */
 
 }
 
@@ -308,7 +353,32 @@ body::-webkit-scrollbar-thumb {
 /* end of navigation bar styling */
 
 
+/*           *************************************************************???? content box styling??***/
+#content-box {
+    
+    width: 100%;
+    /* height: 100%;
+    
+    display: flex; 
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center; */
+}
+#inner-form-container{
+    width: 50%;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    background-color: rgb(247,247,247);
+    text-align:center;
+    border-radius: 25px;
+    padding-bottom: 3rem;
+    box-shadow: rgba(101, 119, 134, 0.2) 0px 0px 15px, rgba(101, 119, 134, 0.15) 0px 0px 3px 1px;
+    margin-bottom: 20px;
 
+}
 #form-container {
     width: 100%;
     display: flex;
@@ -333,7 +403,7 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
 }
 
-
+/*banner-dropdown-title*/
 #account-form {
     display: flex;
     flex-direction: column; 
@@ -401,22 +471,43 @@ body::-webkit-scrollbar-thumb {
 }
 
 #main-heading{
-    color: white;
-    margin-top: 5rem;
-    
+    color:white;
+    min-width: 500px;
+    min-height: 100px;
+    text-align: center;
+    /* margin-bottom: 1.2rem; */
+    /* padding-top:5rem; */
 }
 
-main {
-    margin-left: 5rem; /*this margin will prevent the main content overlapping the nav sidebar. REM is a size relatvie to the font size on the root element which we set to 16*/
+main { /****************************************************************************************************************/
+    padding-left: 5rem; /*this margin will prevent the main content overlapping the nav sidebar. REM is a size relatvie to the font size on the root element which we set to 16*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     /*so rem is 5 and root font size is 16 so 16*5 = 80px */
-    padding: 1rem;
-    margin-top: 5rem;
+    border: 1px solid green; /********************/
+    padding-top: 5rem;
+   
+    
+    /* height: calc(100vh - 5.5rem); not working because not an overall page container */
+    width: 100%;
     height: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
 
 }
 
 
-
+#a1{
+    width: 80%;
+    border: 1px solid black;
+    height: 90%;
+}
+#a2{
+    width: 80%;
+    border: 1px solid black;
+    height: 40%;
+}
 
 @media only screen and (max-width: 600px) {
     #account-form { 
@@ -425,4 +516,5 @@ main {
         border-radius: 0;
     }
 }
+
 

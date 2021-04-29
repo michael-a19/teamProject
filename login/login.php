@@ -1,7 +1,7 @@
 <?php
     session_start(); 
     //redirect if user is already logged in
-    if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == True){
+    if( isset($_SESSION['user_id']) ){
         //redirect to homepage
         header('location: ./index.php');
     }
@@ -9,10 +9,10 @@
     
     $error = "";
 
-    echo pageStart("Login", "./styles/style.css");
+    echo pageStart("Login","");   //change
     echo createBanner();
-    echo '<div id="page-container" class="background2">'; 
-    echo generateFormError();
+    echo "<main class='background2'>";//'<div id="page-container" class="background2">'; 
+    echo generateFormError(); //creates an error 
 ?>
     <div id="main-heading">
         <h1>Account Login</h1>
@@ -36,7 +36,7 @@
             </a>
         </form>
     </div>
-</div> <!--page-container end -->
+</main> <!--page-container end -->
 
             <script>
                 //validate stuff trim and that 
