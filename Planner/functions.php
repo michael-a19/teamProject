@@ -70,6 +70,191 @@ function getDayMeetings($dbConn, $date)
     return $dayMeetings;
 }
 
+function getClassOrMeetingID($dbConn, $eventID, $eventType)
+{
+    if (strcmp($eventType, "class") == 0)
+    {
+        // SQL query that retrieves the class ID for a scheduled class or meeting
+        $sqlQuery = "SELECT tp_class.class_id
+    	FROM tp_class
+    	INNER JOIN tp_scheduled_classes
+		ON tp_class.class_id = tp_scheduled_classes.class_id
+        WHERE scheduled_class_id = :eventID";
+
+        // Prepare the sql statement using PDO
+        $stmt = $dbConn->prepare($sqlQuery);
+
+        // Execute the query using PDO
+        $stmt->execute(array(':eventID' => $eventID));
+
+        // Store data retrieved in an Event object
+        while ($rowObj = $stmt->fetchObject())
+        {
+            return $rowObj->class_id;
+        }
+    }
+    if (strcmp($eventType, "meeting") == 0)
+    {
+        // SQL query that retrieves the meeting ID for a scheduled class or meeting
+        $sqlQuery = "SELECT tp_meeting.meeting_id
+    	FROM tp_meeting
+    	INNER JOIN tp_scheduled_meetings
+		ON tp_meeting.meeting_id = tp_scheduled_meetings.meeting_id
+        WHERE scheduled_meeting_id = :eventID";
+
+        // Prepare the sql statement using PDO
+        $stmt = $dbConn->prepare($sqlQuery);
+
+        // Execute the query using PDO
+        $stmt->execute(array(':eventID' => $eventID));
+
+        // Store data retrieved in an Event object
+        while ($rowObj = $stmt->fetchObject())
+        {
+            return $rowObj->meeting_id;
+        }
+    }
+    return null;
+}
+
+function getEventDetails($dbConn, $eventID, $eventType)
+{
+    if (strcmp($eventType, "class") == 0)
+    {
+        try
+        {
+            // SQL query that retrieves the details of a scheduled class given its ID
+            $sqlQuery = "SELECT class_desc, scheduled_class_start_time, scheduled_class_end_time, scheduled_class_date, subject_name, scheduled_class_id
+		    FROM tp_class
+		    INNER JOIN tp_scheduled_classes
+		    ON tp_class.class_id = tp_scheduled_classes.class_id
+		    INNER JOIN tp_subject
+		    ON tp_class.subject_id = tp_subject.subject_id
+            WHERE scheduled_class_id = :eventID";
+
+            // Prepare the sql statement using PDO
+            $stmt = $dbConn->prepare($sqlQuery);
+
+            // Execute the query using PDO
+            $stmt->execute(array(':eventID' => $eventID));
+
+            // Store data retrieved in an Event object
+            while ($rowObj = $stmt->fetchObject())
+            {
+                $event = new Event($rowObj->class_desc, $rowObj->scheduled_class_start_time, $rowObj->scheduled_class_end_time,
+                    $rowObj->scheduled_class_date, $rowObj->subject_name, "class", $rowObj->scheduled_class_id);
+                return $event;
+            }
+        }
+        catch (Exception $e)
+        {
+            echo "<p>Query failed: ".$e->getMessage()."</p>\n";
+        }
+    }
+
+    if (strcmp($eventType, "meeting") == 0)
+    {
+        try
+        {
+            // SQL query that retrieves the details of a scheduled meeting given its ID
+            $sqlQuery = "SELECT meeting_desc, scheduled_meeting_start_time, scheduled_meeting_end_time, scheduled_meeting_date, subject_name, scheduled_meeting_id
+		    FROM tp_meeting
+		    INNER JOIN tp_scheduled_meetings
+		    ON tp_meeting.meeting_id = tp_scheduled_meetings.meeting_id
+		    INNER JOIN tp_subject
+		    ON tp_meeting.subject_id = tp_subject.subject_id
+		    WHERE scheduled_meeting_id = :eventID";
+
+            // Prepare the sql statement using PDO
+            $stmt = $dbConn->prepare($sqlQuery);
+
+            // Execute the query using PDO
+            $stmt->execute(array(':eventID' => $eventID));
+
+            // Store data retrieved in an Event object
+            while ($rowObj = $stmt->fetchObject())
+            {
+                $event = new Event($rowObj->meeting_desc, $rowObj->scheduled_meeting_start_time, $rowObj->scheduled_meeting_end_time,
+                    $rowObj->scheduled_meeting_date, $rowObj->subject_name, "meeting", $rowObj->scheduled_meeting_id);
+                return $event;
+            }
+        }
+        catch (Exception $e)
+        {
+            echo "<p>Query failed: ".$e->getMessage()."</p>\n";
+        }
+    }
+    return null;
+}
+
+function displayStaff($dbConn, $eventID, $eventType)
+{
+    if (strcmp($eventType, "class") == 0)
+    {
+        try
+        {
+            // SQL query that retrieves the teachers for a class
+            $sqlQuery = "SELECT user_surname, user_forename
+            FROM tp_users
+            INNER JOIN tp_class_members
+            ON tp_users.user_id = tp_class_members.user_id
+            INNER JOIN tp_scheduled_classes
+            ON tp_scheduled_classes.class_id = tp_class_members.class_id
+            WHERE scheduled_class_id = :eventID
+            AND user_type_id = 2";
+
+            // Prepare the sql statement using PDO
+            $stmt = $dbConn->prepare($sqlQuery);
+
+            // Execute the query using PDO
+            $stmt->execute(array(':eventID' => $eventID));
+
+            // Store data retrieved in an array
+            while ($rowObj = $stmt->fetchObject())
+            {
+                echo "<div>".$rowObj->user_forename." ".$rowObj->user_surname."</div>";
+            }
+        }
+        catch (Exception $e)
+        {
+            echo "<p>Query failed: ".$e->getMessage()."</p>\n";
+        }
+    }
+
+    if (strcmp($eventType, "meeting") == 0)
+    {
+        try
+        {
+            // SQL query that retrieves the teachers for a meeting
+            $sqlQuery = "SELECT user_surname, user_forename
+            FROM tp_users
+            INNER JOIN tp_meeting_members
+            ON tp_users.user_id = tp_meeting_members.user_id
+            INNER JOIN tp_scheduled_meetings
+            ON tp_scheduled_meetings.meeting_id = tp_meeting_members.meeting_id
+            WHERE scheduled_meeting_id = :eventID
+            AND user_type_id = 2";
+
+            // Prepare the sql statement using PDO
+            $stmt = $dbConn->prepare($sqlQuery);
+
+            // Execute the query using PDO
+            $stmt->execute(array(':eventID' => $eventID));
+
+            // Store data retrieved in an array
+            while ($rowObj = $stmt->fetchObject())
+            {
+                echo "<div>".$rowObj->user_forename." ".$rowObj->user_surname."</div>";
+            }
+        }
+        catch (Exception $e)
+        {
+            echo "<p>Query failed: ".$e->getMessage()."</p>\n";
+        }
+    }
+
+}
+
 function displayDayColumn()
 {
     for ($i = 0; $i < 24; $i++)
@@ -97,7 +282,8 @@ function displayDayEvents($date)
                 $endTime = 60 * (int)date('H', strtotime($events[$i]->end_time)) + (int)date('i', strtotime($events[$i]->end_time));
                 $position = timeToPercentage($startTime);
                 $height = timeLengthToHeight($startTime, $endTime);
-                echo "<div class=\"event\" style=\"top: ".$position."%; height: ".$height."%;\">".$events[$i]->desc."</div>\n";
+                echo "<a href='eventDetails.php?eventID=".$events[$i]->scheduled_event_id."&eventType=".$events[$i]->event_type."' 
+                class='event' style=\"top: ".$position."%; height: ".$height."%;\">".$events[$i]->desc."</a>\n";
             }
     }
     catch (Exception $e){
@@ -176,11 +362,36 @@ function displaySubjectSelectOptions($default)
         while ($rowObj = $stmt->fetchObject()) {
             if ($default == $rowObj->subject_id)
             {
-                echo "<option value=\"".$rowObj->subject_id."\" selected=\"selected\">".$rowObj->subject_name." </option>\n";
+                echo "<option value='".$rowObj->subject_id."' selected='selected'>".$rowObj->subject_name." </option>\n";
             }
             else {
-                echo "<option value=\"".$rowObj->subject_id."\">".$rowObj->subject_name."</option>\n";
+                echo "<option value='".$rowObj->subject_id."'>".$rowObj->subject_name."</option>\n";
             }
+        }
+    }
+    catch (Exception $e){
+        echo "<p>Query failed: ".$e->getMessage()."</p>\n";
+    }
+}
+
+function displayClassSelectOptions()
+{
+    try
+    {
+        $dbConn = getConnection();
+
+        $sqlQuery = "SELECT class_desc, class_id
+		FROM tp_class
+		ORDER BY class_desc";
+        // Prepare the sql statement using PDO
+        $stmt = $dbConn->prepare($sqlQuery);
+
+        // Execute the query using PDO
+        $stmt->execute();
+
+        while ($rowObj = $stmt->fetchObject())
+        {
+            echo "<option value='".$rowObj->class_id."'>".$rowObj->class_desc."</option>\n";
         }
     }
     catch (Exception $e){

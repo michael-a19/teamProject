@@ -43,9 +43,7 @@ function displayClasses($dbConn, $userID)
     $i = 0;
     while ($rowObj = $stmt->fetchObject()) {
         echo "<div>".$rowObj->class_desc."&#9;".$rowObj->subject_name."&#9;
-        <a href='editClassForm.php?classID=".$rowObj->class_id."'>Edit</a>
-        &#9;
-        <a href='editClassForm.php?classID=".$rowObj->class_id."'>Delete</a>
+        <a href='editClassForm.php?classID=".$rowObj->class_id."'>Edit</a>\n
         </div>\n";
         $i++;
     }

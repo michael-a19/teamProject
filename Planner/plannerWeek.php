@@ -41,9 +41,8 @@ for ($i = 1; $i < 7; $i++)
                 <button onclick="toggleViewDropDown()" class="dropbtn">Week</button>
                 <div id="view-btn" class="dropdown-content">
                     <?php
-                    echo "<a href=\"plannerDay.php?date=".$date."\">Day</a>";
-                    echo "<a href=\"plannerWeek.php?date=".$date."\">Week</a>";
-                    echo "<a href=\"#\">Month</a>";
+                    echo "<a href=\"plannerDay.php?date=".$date."\">Day</a>\n";
+                    echo "<a href=\"plannerWeek.php?date=".$date."\">Week</a>\n";
                     ?>
                 </div>
             </div>
@@ -52,13 +51,11 @@ for ($i = 1; $i < 7; $i++)
             echo "<h1>".date("D d/m/Y", $days[0])." - ".date("D d/m/Y", $days[6])."</h1>\n";
             echo "<button onclick=\"changeDate('".date("Y-m-d", strtotime("+1 week", $days[0]))."')\" class=\"forwardWeek\">&#9654;</button>\n";
             ?>
-            <div class="dropdown">
-                <button onclick="toggleShowDropdown()" class="dropbtn">Dropdown</button>
-                <div id="show-btn" class="dropdown-content">
-                    <a href="#">Link 1</a>
-                    <a href="#">Link 2</a>
-                    <a href="#">Link 3</a>
-                </div>
+            <div class="add-event-btns">
+                <?php
+                echo "<a href='addScheduledEventForm.php?eventType=class&date=".$monday."'>Add scheduled class</a>\n";
+                echo "<a href='addScheduledEventForm.php?eventType=meeting&date=".$monday."'>Add scheduled meeting</a>\n";
+                ?>
             </div>
         </div>
         <div class="table">

@@ -49,7 +49,7 @@ $classID = filter_has_var(INPUT_GET, 'classID')
             echo "<input type=\"text\" name=\"name\" value=\"".$className."\">";
         ?>
     </label>
-    <label>
+    <label>Subject:
         <select name="subject">
             <?php
             displaySubjectSelectOptions($subjectID);
@@ -63,7 +63,10 @@ $classID = filter_has_var(INPUT_GET, 'classID')
 </form>
 <br>
 <?php
-echo "<a href=\"editClassMembers.php?classID=".$classID."\">Edit members list</a>";
+echo "<a href=\"editClassMembersForm.php?classID=".$classID."\">Edit members list</a>\n";
+echo "<a href=\"scheduleClassesForm.php?classID=".$classID."\">Schedule classes</a>\n";
+echo "<a href=\"deleteClass.php?classID=".$classID."\">Delete class</a>\n";
+echo "<a href=\"deleteScheduledClasses.php?classID=".$classID."\">Delete all scheduled classes</a>\n";
 ?>
 
 </body>

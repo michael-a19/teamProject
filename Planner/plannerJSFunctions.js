@@ -29,8 +29,3 @@ function changeDate(date)
     searchParams.set("date", date);
     window.location.search = searchParams.toString();
 }
-
-function autocomplete(input, array)
-{
-
-}
