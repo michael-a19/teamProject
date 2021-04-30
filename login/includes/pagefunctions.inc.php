@@ -1,7 +1,11 @@
 <?php 
-
-function pageStart($title, $css) {
-    //should probably put the fonts in as an option 
+function pageStart($title, $css, $js = "") {
+     
+    $jsLink = ""; 
+    if(!empty($js))
+    {
+        $jsLink = "<script src={$js} type='text/javascript'></script>";
+    }
     $pageStart = <<<START
     <!DOCTYPE HTML>
     <html>
@@ -15,11 +19,12 @@ function pageStart($title, $css) {
             <link rel="preconnect" href="https://fonts.gstatic.com">
             <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300&family=Shadows+Into+Light&display=swap" rel="stylesheet">
             <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+            $jsLink
         </head>
         <body>
             <div id="full-page-container">
 START;
-//add in main or something 
+
     return $pageStart; 
 }
 
