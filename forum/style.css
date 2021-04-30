@@ -1,0 +1,161 @@
+/* BEGIN BASIC FORUM STYLES */
+/* Style.css */
+
+body {
+    /* set background colour - white */
+    /* background-color: white; */
+    background-color: #DEDEDE;
+    /* centre text on page */
+    text-align: center;
+    /* set font for body */
+    font-family: Arial;
+}
+
+#contentWrapper {
+    /* set width of wrapper */
+    width: 900px;
+    /* center content on page */
+    margin: 0 auto;
+}
+
+#mainContent {
+    /* set background colour - white */
+    background-color: white;
+    /* set border properties */
+    border: 1px solid #000;
+    float: left;
+    /* set font for content */
+    font-family: Arial; 
+    padding: 20px 30px;
+    /* align text left */
+    text-align: left;
+    /* fill width of div */
+    width: 100%;
+}
+
+#optionBar {
+    float: left;
+    border: 1px solid #000;
+    /* avoiding double border */
+    border-bottom: none;
+    /* function to make sure 'content' div does not float next to optionBar and stays under it */
+    clear: both;
+    width: 100%;
+    height: 20px;
+    padding: 10px 30px;
+    background-color: #FFF;
+    text-align: left;
+    font-size: 85%;
+}
+
+#optionBar a:hover {
+    /* link change colour when hover */
+    background-color: #009FC1;
+    transition-duration: 0.4s;
+}
+
+#infoBar {
+    /* info bar styling - right info with login name */
+    background-color: #fff;
+    float: right;
+    width: 250px;
+}
+
+#footer {
+    /* both sides not able to float */
+    clear: both;
+}
+
+
+/* begin table styles */
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table a {
+    /* link colour */
+    color: #000;
+}
+
+table a:hover {
+    /* when hover over table properties */
+    color: #373737;
+    text-decoration: none;
+}
+
+th {
+    /* differentiate colour */
+    background-color: grey;
+    color: #F0F0F0;
+}
+
+td {
+    padding: 5px;
+}
+
+
+/* Begin font styles */
+h1,
+#footer {
+    color: black;
+}
+
+h3 {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* OPTION BAR styles */
+.item {
+    background-color: #949494;
+    border: 1px solid #616161;
+    color: #FFF;
+    padding: 3px;
+    text-decoration: none;
+}
+
+.leftpart {
+    width: 70%;
+}
+
+.rightpart {
+    width: 30%;
+}
+
+.small {
+    font-size: 75%;
+    color: #373737;
+}
+
+/* footer styling */
+#footer {
+    font-size: 85%;
+    padding: 3px 0 0 0;
+    position: absolute;
+    top: 10px;
+}
+
+/* topic post styling */
+.topic-post {
+    height: 100px;
+    overflow: auto;
+}
+
+/* post content styliing */
+.post-content {
+    padding: 30px;
+}
+
+/* text area stylin */
+textarea {
+    width: 100%;
+    height: 200px;
+}
+
+/* reply box padding */
+#replyBox {
+    padding: 10px;
+}
