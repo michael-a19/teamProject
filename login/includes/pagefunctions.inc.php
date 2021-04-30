@@ -1,6 +1,7 @@
 <?php 
+
 function pageStart($title, $css, $js = "") {
-     
+    session_start(); 
     $jsLink = ""; 
     if(!empty($js))
     {
