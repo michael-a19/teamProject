@@ -99,7 +99,7 @@ else
 		else
 		{
 			// display success message to the user and link to the forum page
-			echo 'Succesfully registered. You can now <a href="signin.php">sign in</a> and start posting!';
+			echo 'Succesfully registered. You can now <a href="../login.php">sign in</a> and start posting!';
 		}
 	}
 }
