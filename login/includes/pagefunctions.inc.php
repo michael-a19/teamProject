@@ -1,7 +1,7 @@
 <?php 
 
-function pageStart($title, $css, $js = "") {
-    session_start(); 
+function pageStart($title, $css="", $js = "") {
+  
     $jsLink = ""; 
     if(!empty($js))
     {
@@ -83,6 +83,17 @@ function checkSessionVariable($key)
      * function to create the navigation bar for the website [change the absolute path of the images if change directory name]
      */
     function createNav(){
+        $teacherOption = "";
+        if( (isset($_SESSION['type'])) && ($_SESSION['type'] == 2) )
+        {
+            $teacherOption = "
+                <li class='nav-item'>
+                    <a href='/login/planner/manageClasses.php' class='nav-link'>
+                    <img class='nav-img' src='/login/images/icons/chevronRight.svg'>
+                    <span class='link-text'>Manage classes</span>
+                </a>
+            </li>";
+        }
         $navbar = <<<NAV
             <nav class="navbar"> 
                 <ul class="navbar-nav">
@@ -120,6 +131,7 @@ function checkSessionVariable($key)
                             <span class="link-text">Planner</span>
                         </a>
                     </li>
+                    {$teacherOption}
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <img class ="nav-img" src="/login/images/icons/cog.svg">
