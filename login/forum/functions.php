@@ -30,8 +30,8 @@ LOGOUT;
             <div id="page-banner">
                 <div id="banner-left-container">
                     <div id="logo-container">
-                        <a id = "logo" href="index.php">
-                            <img src="images/icons/logo2.png" width="500">
+                        <a id = "logo" href="../index.php">
+                            <img src="../images/icons/logo2.png" width="500">
                         </a>
                     </div>
                 </div>

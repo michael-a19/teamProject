@@ -16,48 +16,48 @@
             <ul class="navbar-nav">
                 <li class="menu-icon" id="menu-button">
                     <span class="nav-link">
-                        <img class="burger-img" src="images/icons/burger.svg">
+                        <img class="burger-img" src="../images/icons/burger.svg">
                         <span class="link-text">A P P - N A M E </span>
                     </span>
                 </li>
                 <li class="nav-item">
                     <a href="../index.php" class="nav-link">
-                        <img class="nav-img" src="images/icons/chevronRight.svg">
+                        <img class="nav-img" src="../images/icons/chevronRight.svg">
                         <span class="link-text">Home</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="planner.php" class="nav-link">
-                        <img class="nav-img" src="images/icons/chevronRight.svg">
+                        <img class="nav-img" src="../images/icons/chevronRight.svg">
                         <span class="link-text">Planner</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="forum.php" class="nav-link">
-                        <img class ="nav-img" src="images/icons/chevronRight.svg">
+                        <img class ="nav-img" src="../images/icons/chevronRight.svg">
                         <span class="link-text">Forum</span>
                     </a>
                 </li>
 
 				<li class="nav-item">
                     <a href="../chat/index.php" class="nav-link">
-                        <img class ="nav-img" src="images/icons/chevronRight.svg">
+                        <img class ="nav-img" src="../images/icons/chevronRight.svg">
                         <span class="link-text">Chat</span>
                     </a>
                 </li>
 
 				<li class="nav-item">
                     <a href="../login.php" class="nav-link">
-                        <img class ="nav-img" src="images/icons/chevronRight.svg">
+                        <img class ="nav-img" src="../images/icons/chevronRight.svg">
                         <span class="link-text">Sign in</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <img class ="nav-img" src="images/icons/cog.svg">
+                        <img class ="nav-img" src="../images/icons/cog.svg">
                         <span class="link-text">Settings</span>
                     </a>
                 </li>
