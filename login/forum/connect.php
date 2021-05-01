@@ -1,7 +1,7 @@
 <?php
 //connect.php
 //setting the session save path
-ini_set("session.save_path", "/home/unn_w18016014/sessionData");
+// ini_set("session.save_path", "/home/unn_w18016014/sessionData");
 //starting the session
     if(!isset($_SESSION)) 
     { 
@@ -10,7 +10,7 @@ ini_set("session.save_path", "/home/unn_w18016014/sessionData");
 // variables of server data
 $server	    = 'localhost';
 $username	= 'unn_w18016014';
-$password	= 'XXXXXXXXXX';
+$password	= 'OEU0MJLC';
 $database	= 'unn_w18016014';
 
 //error handling
