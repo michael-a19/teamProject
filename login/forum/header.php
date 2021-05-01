@@ -143,7 +143,7 @@ echo createBanner();
 		else
 		{
 			// if user is not signed in then display signin link or create account
-			echo '<a class="item" href="signin.php">Sign in</a> or <a class="item" href="signup.php">Create an account</a>';
+			echo '<a class="item" href="../login.php">Sign in</a> or <a class="item" href="../register.php">Create an account</a>';
 		}
 		?> -->
 		</div>

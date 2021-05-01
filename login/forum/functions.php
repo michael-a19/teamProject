@@ -9,17 +9,17 @@
         {
             $name = $_SESSION['user_forename'] . " " . $_SESSION['user_surname'];
 
-            //change banner classes to drop down settings or some shit 
+            //change banner classes to drop down settings
             $logoutMenu = <<<LOGOUT
                 <div id="banner-dropdown-container">
                     <button id="banner-dropdown-button">$name</button>
                     <div id="dropdown-visibility">
                         <div id="dropdown-content">
                             <span class="banner-dropdown-title" >Account settings</span>
-                            <a class="banner-dropdown-item" href="index.php">Home</a>
-                            <a class="banner-dropdown-item" href="changeprofile.php">Profile</a>
-                            <a class="banner-dropdown-item" href="password.php">Password</a>
-                            <a class="banner-dropdown-item" href="signout.php">Sign out</a>
+                            <a class="banner-dropdown-item" href="../index.php">Home</a>
+                            <a class="banner-dropdown-item" href="../changeprofile.php">Profile</a>
+                            <a class="banner-dropdown-item" href="../password.php">Password</a>
+                            <a class="banner-dropdown-item" href="../includes/logout.inc.php">Sign out</a>
                         </div>
                     </div>
                 </div>
