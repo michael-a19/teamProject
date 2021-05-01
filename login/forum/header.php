@@ -21,7 +21,7 @@
                     </span>
                 </li>
                 <li class="nav-item">
-                    <a href="index.php" class="nav-link">
+                    <a href="../index.php" class="nav-link">
                         <img class="nav-img" src="images/icons/chevronRight.svg">
                         <span class="link-text">Home</span>
                     </a>
@@ -42,14 +42,14 @@
                 </li>
 
 				<li class="nav-item">
-                    <a href="chat.php" class="nav-link">
+                    <a href="../chat/index.php" class="nav-link">
                         <img class ="nav-img" src="images/icons/chevronRight.svg">
                         <span class="link-text">Chat</span>
                     </a>
                 </li>
 
 				<li class="nav-item">
-                    <a href="signin.php" class="nav-link">
+                    <a href="../login.php" class="nav-link">
                         <img class ="nav-img" src="images/icons/chevronRight.svg">
                         <span class="link-text">Sign in</span>
                     </a>
@@ -131,10 +131,11 @@ echo createBanner();
 
 		<!-- Right hand side login/create account bar -->
 		<div id="infoBar">
-		<!-- <?php
+		
+        <!-- <?php
 		error_reporting(E_ALL & ~E_NOTICE);
 		// if user is signed in
-		if($_SESSION['signed_in'])
+		if($_SESSION['user_id'])
 		{
 			// display message including users user_name. Include link to signout
 			echo 'Welcome <b>' . htmlentities($_SESSION['user_forename']) . '</b>. <a class="item" href="signout.php">Sign out</a>';

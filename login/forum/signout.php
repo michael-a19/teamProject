@@ -10,7 +10,7 @@ include 'header.php';
 echo '<h2>Sign out</h2>';
 
 //if the user is signed in
-if($_SESSION['signed_in'] == true)
+if($_SESSION['loggedIn'] == true)
 {
 	//unset all variables and set them as NULL
 	$_SESSION['signed_in'] = NULL;

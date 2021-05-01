@@ -8,7 +8,7 @@ echo '<h3>Sign in</h3><br />';
 
 // check to see if the user is already logged in
 // if already logged in then no point in displaying the page
-if(isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true)
+if(isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] == true)
 {
 	// message to tell the user they are already signed in and link to signout
 	echo 'You are already signed in, you can <a href="signout.php">sign out</a> if you want.';
@@ -68,11 +68,11 @@ else
 						user_forename,
 						user_type_id
 					FROM
-						f_users
+						tp_users
 					WHERE
 					user_forename = '" . mysql_real_escape_string($_POST['user_forename']) . "'
 					AND
-						user_pass = '" . sha1($_POST['user_pass']) . "'";
+						user_password = '" . sha1($_POST['user_password']) . "'";
 
 			$result = mysql_query($sql);
 			// if the result has an error
@@ -95,7 +95,7 @@ else
 				{
 					// credentials entered were successful
 					// set the $_SESSION['signed_in'] variable to true
-					$_SESSION['signed_in'] = true;
+					$_SESSION['loggedIn'] = true;
 
 					// set user_id and user_name values in the $_SESSION
 					while($row = mysql_fetch_assoc($result))

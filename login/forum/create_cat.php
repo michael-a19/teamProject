@@ -5,7 +5,7 @@ include 'header.php';
 
 echo '<h2>Create a subject</h2>';
 // if the user is not signed in OR the user_type_id is not equal to '1'
-if($_SESSION['signed_in'] == false | $_SESSION['user_type_id'] != 1 )
+if(!isset($_SESSION['user_id']) | $_SESSION['type'] != 2 )
 {
 	//the user is not an admin
 	echo 'Sorry, you do not have sufficient rights to access this page.';

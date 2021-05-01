@@ -7,7 +7,7 @@
         $logoutMenu ="";
         if(isset($_SESSION['user_id']))
         {
-            $name = $_SESSION['user_forename'];
+            $name = $_SESSION['user_forename'] . " " . $_SESSION['user_surname'];
 
             //change banner classes to drop down settings or some shit 
             $logoutMenu = <<<LOGOUT

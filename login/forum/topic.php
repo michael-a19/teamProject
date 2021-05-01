@@ -45,14 +45,14 @@ else
 						f_posts.post_content,
 						f_posts.post_date,
 						f_posts.post_by,
-						f_users.user_id,
-						f_users.user_forename
+						tp_users.user_id,
+						tp_users.user_forename
 					FROM
 						f_posts
 					LEFT JOIN
-						f_users
+						tp_users
 					ON
-						f_posts.post_by = f_users.user_id
+						f_posts.post_by = tp_users.user_id
 					WHERE
 						f_posts.post_topic = " . mysql_real_escape_string($_GET['id']);
 
@@ -76,8 +76,8 @@ else
 				}
 			}
 
-			// if the user is not signed_in
-			if(!$_SESSION['signed_in'])
+			// // if the user is not loggedIn
+			if(!isset($_SESSION['user_id']))
 			{
 				// display error message to sign in before the user is able to reply
 				echo '<tr><td colspan=2>You must be <a href="signin.php">signed in</a> to reply. You can also <a href="signup.php">sign up</a> for an account.';

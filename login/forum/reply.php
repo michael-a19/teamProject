@@ -13,7 +13,7 @@ if($_SERVER['REQUEST_METHOD'] != 'POST')
 else
 {
 	// check for sign in status
-	if(!$_SESSION['signed_in'])
+	if(!isset($_SESSION['user_id']))
 	{
 		echo 'You must be signed in to post a reply.';
 	}

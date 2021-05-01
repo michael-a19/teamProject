@@ -5,7 +5,7 @@ include 'header.php';
 
 echo '<h2>Create a topic</h2>';
 // if the user is not signed in OR the user_type_id is not equal to '1'
-if($_SESSION['signed_in'] == false | $_SESSION['user_type_id'] != 1)
+if(!isset($_SESSION['user_id']) | $_SESSION['type'] != 2)
 {
 	echo 'Sorry, you do not have sufficient rights to access this page.';
 }
@@ -36,7 +36,7 @@ else
 			if(mysql_num_rows($result) == 0)
 			{
 				//there are no subjects listed, so a topic can't be added
-				if($_SESSION['user_type_id'] == 1)
+				if($_SESSION['type'] == 1)
 				{
 					// gives the user an error message to create a subject first
 					echo 'You have not created any subjects yet.';
