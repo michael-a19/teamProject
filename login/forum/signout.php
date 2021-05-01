@@ -27,7 +27,7 @@ if($_SESSION['loggedIn'] == true)
 else
 {
 	// if the user is not signed in, display message and option to sign in.
-	echo 'You are not signed in. Would you <a href="signin.php">like to</a>?';
+	echo 'You are not signed in. Would you <a href="../login.php">like to</a>?';
 }
 
 // include footer to webpage
