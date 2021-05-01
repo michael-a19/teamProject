@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("../includes/pagefunctions.inc.php");
 echo pageStart("Planner", "style.css", "plannerJSFunctions.js");
 echo createNav();
@@ -41,7 +42,7 @@ $unixDate = strtotime($date);
                     <?php
                     if ($isTeacher)
                     {
-                        echo "<a href='addScheduledEventForm.php?eventType=class&date=".$date."'>Add scheduled class</a>\n";
+                        echo "<a href='addScheduledEventForm.php?eventType=class&date=".$date."'>Add scheduled class</a><br>\n";
                         echo "<a href='addScheduledEventForm.php?eventType=meeting&date=".$date."'>Add scheduled meeting</a>\n";
                     }
                     ?>

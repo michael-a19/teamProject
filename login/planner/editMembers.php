@@ -1,6 +1,7 @@
 <?php
 include("functions.php");
 include("../includes/functions.inc.php");
+session_start();
 checkLoggedIn();
 $userIDList = [];
 
@@ -31,7 +32,6 @@ if(isset($_POST["groupMembers"]))
 else {
     array_push($errors, 'No users selected');
 }
-
 
 $dbConn = getConnection();
 if (strcmp($type, 'class') == 0)
@@ -86,7 +86,7 @@ if (strcmp($type, "meeting") == 0)
         $stmt = $dbConn->prepare($sql);
 
         // Execute the query using PDO
-        $stmt->execute(array(':classID' => $classID));
+        $stmt->execute(array(':meetingID' => $meetingID));
 
         for ($i = 0; $i < sizeof($userIDList); $i++)
         {

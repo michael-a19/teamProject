@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("../includes/pagefunctions.inc.php");
 echo pageStart("Planner", "style.css", "plannerJSFunctions.js");
 echo createNav();
@@ -58,7 +59,7 @@ for ($i = 1; $i < 7; $i++)
                     <?php
                     if ($isTeacher)
                     {
-                        echo "<a href='addScheduledEventForm.php?eventType=class&date=".$monday."'>Add scheduled class</a>\n";
+                        echo "<a href='addScheduledEventForm.php?eventType=class&date=".$monday."'>Add scheduled class</a><br>\n";
                         echo "<a href='addScheduledEventForm.php?eventType=meeting&date=".$monday."'>Add scheduled meeting</a>\n";
                     }
                     ?>

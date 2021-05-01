@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("../includes/pagefunctions.inc.php");
 echo pageStart("Edit members list", "editMembersStyle.css", "Person.js");
 echo createNav();
@@ -118,11 +119,11 @@ include("functions.php");
     $type = '';
     if (isset($meetingID))
     {
-        $type = 'class';
+        $type = 'meeting';
     }
     if (isset($classID))
     {
-        $type = 'meeting';
+        $type = 'class';
     }
 
     retrieveAllUsers();
@@ -157,21 +158,21 @@ include("functions.php");
                 <div id="class-members-right-column">
                     <select id="right-select-list" multiple name="groupMembers[]">
                         <?php
-                        if (strcmp($type, "class"))
+                        if (strcmp($type, "class") == 0)
                         {
-                            displayMembersList($classID);
+                            displayMembersList($classID, $type);
                         }
-                        if (strcmp($type, "meeting"))
+                        if (strcmp($type, "meeting") == 0)
                         {
-                            displayMembersList($meetingID);
+                            displayMembersList($meetingID, $type);
                         }
                         ?>
                     </select>
                     <?php
-                    if (strcmp($type, "class")) {
+                    if (strcmp($type, "class") == 0) {
                         echo "<input name='classID' value='" . $classID . "' hidden>";
                     }
-                    if (strcmp($type, "meeting")) {
+                    if (strcmp($type, "meeting") == 0) {
                         echo "<input name='meetingID' value='" . $meetingID . "' hidden>";
                     }
                     ?>
@@ -182,7 +183,7 @@ include("functions.php");
     <?php
     function displayMembersList($classOrMeetingId, $type)
     {
-        if (strcmp($type, "class"))
+        if (strcmp($type, "class") == 0)
         {
             try
             {
@@ -190,12 +191,12 @@ include("functions.php");
 
                 // SQL query that gets the user list for a class
                 $sqlQuery = " SELECT user_surname, user_forename, tp_users.user_id, IFNULL(user_year_group, 0) 'user_year_group', user_type_id
-        FROM tp_users
-        INNER JOIN tp_class_members
-        ON tp_class_members.user_id = tp_users.user_id
-        WHERE tp_class_members.class_id = :class_id
-        ORDER BY user_surname
-        ";
+                FROM tp_users
+                INNER JOIN tp_class_members
+                ON tp_class_members.user_id = tp_users.user_id
+                WHERE tp_class_members.class_id = :class_id
+                ORDER BY user_surname
+                ";
 
                 // Prepare the sql statement using PDO
                 $stmt = $dbConn->prepare($sqlQuery);
@@ -218,7 +219,7 @@ include("functions.php");
                 echo "<p>Query failed: ".$e->getMessage()."</p>\n";
             }
         }
-        if (strcmp($type, "meeting"))
+        if (strcmp($type, "meeting") == 0)
         {
             try
             {
@@ -226,12 +227,12 @@ include("functions.php");
 
                 // SQL query that gets the user list for a class
                 $sqlQuery = " SELECT user_surname, user_forename, tp_users.user_id, IFNULL(user_year_group, 0) 'user_year_group', user_type_id
-        FROM tp_users
-        INNER JOIN tp_meeting_members
-        ON tp_meeting_members.user_id = tp_users.user_id
-        WHERE tp_meeting_members.class_id = :meeting_id
-        ORDER BY user_surname
-        ";
+                FROM tp_users
+                INNER JOIN tp_meeting_members
+                ON tp_meeting_members.user_id = tp_users.user_id
+                WHERE tp_meeting_members.meeting_id = :meeting_id
+                ORDER BY user_surname
+                ";
 
                 // Prepare the sql statement using PDO
                 $stmt = $dbConn->prepare($sqlQuery);

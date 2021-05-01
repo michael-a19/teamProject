@@ -6,6 +6,14 @@ main {
     background-color: white;
 }
 
+a {
+    color: #2e4055;
+}
+
+a :visited {
+    color: #2e4055;
+}
+
 .column {
     width: 100%;
     min-width: 70pt;

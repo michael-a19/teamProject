@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("../includes/pagefunctions.inc.php");
 echo pageStart("Edit class", "style.css");
 echo createNav();

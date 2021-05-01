@@ -1,6 +1,7 @@
 <?php
 include("functions.php");
 include("../includes/functions.inc.php");
+session_start();
 checkLoggedIn();
 $eventID = filter_has_var(INPUT_GET, 'eventID')
     ? $_GET['eventID'] : null;

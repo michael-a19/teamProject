@@ -1,6 +1,7 @@
 <?php
 include("functions.php");
 include("../includes/functions.inc.php");
+session_start();
 checkLoggedIn();
 
 $name = isset($_REQUEST['name']) ? $_REQUEST['name'] : null;

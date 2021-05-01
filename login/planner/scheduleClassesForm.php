@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("../includes/pagefunctions.inc.php");
 echo pageStart("Schedule classes", "style.css");
 echo createNav();

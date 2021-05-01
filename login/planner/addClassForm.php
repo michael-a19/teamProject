@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("../includes/pagefunctions.inc.php");
 include("../includes/functions.inc.php");
 echo pageStart("Add new class", "style.css");

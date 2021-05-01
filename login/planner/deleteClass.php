@@ -1,5 +1,6 @@
 <?php
 include("../includes/functions.inc.php");
+session_start();
 checkLoggedIn();
 $classID = filter_has_var(INPUT_GET, 'classID')
     ? $_GET['classID'] : null;

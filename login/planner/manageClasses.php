@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("../includes/pagefunctions.inc.php");
 echo pageStart("My classes", "style.css");
 echo createNav();
@@ -16,7 +17,7 @@ include("functions.php");
     try
     {
         $dbConn = getConnection();
-        displayClasses($dbConn, 1);
+        displayClasses($dbConn, $_SESSION['user_id']);
     }
     catch (Exception $e)
     {

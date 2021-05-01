@@ -1,5 +1,6 @@
 <?php
 include("../includes/functions.inc.php");
+session_start();
 checkLoggedIn();
 include("functions.php");
 
