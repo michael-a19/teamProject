@@ -12,7 +12,7 @@ function getConnection()
     }
 }
 
-function getDayClasses($dbConn, $date)
+function getDayClasses($dbConn, $date, $userID)
 {
     // SQL query that retrieves the basic data for each class on the given day
     $sqlQuery = "SELECT class_desc, scheduled_class_start_time, scheduled_class_end_time, scheduled_class_date, subject_name, scheduled_class_id
@@ -21,13 +21,16 @@ function getDayClasses($dbConn, $date)
 		ON tp_class.class_id = tp_scheduled_classes.class_id
 		INNER JOIN tp_subject
 		ON tp_class.subject_id = tp_subject.subject_id
+		INNER JOIN tp_class_members
+		ON tp_class_members.class_id = tp_scheduled_classes.class_id
 		WHERE tp_scheduled_classes.scheduled_class_date = :date
+	    AND tp_class_members.user_id = :userID
 		ORDER BY scheduled_class_start_time";
     // Prepare the sql statement using PDO
     $stmt = $dbConn->prepare($sqlQuery);
 
     // Execute the query using PDO
-    $stmt->execute(array(':date' => $date));
+    $stmt->execute(array(':date' => $date, ':userID' => $userID));
 
     // Store data retrieved in an array
     $dayClasses = array();
@@ -41,7 +44,7 @@ function getDayClasses($dbConn, $date)
     return $dayClasses;
 }
 
-function getDayMeetings($dbConn, $date)
+function getDayMeetings($dbConn, $date, $userID)
 {
     // SQL query that retrieves the basic data for each meeting on the given day
     $sqlQuery = "SELECT meeting_desc, scheduled_meeting_start_time, scheduled_meeting_end_time, scheduled_meeting_date, subject_name, scheduled_meeting_id
@@ -50,13 +53,16 @@ function getDayMeetings($dbConn, $date)
 		ON tp_meeting.meeting_id = tp_scheduled_meetings.meeting_id
 		INNER JOIN tp_subject
 		ON tp_meeting.subject_id = tp_subject.subject_id
+		INNER JOIN tp_meeting_members
+		ON tp_meeting_members.meeting_id = tp_scheduled_meetings.meeting_id
 		WHERE tp_scheduled_meetings.scheduled_meeting_date = :date
+		AND tp_meeting_members.user_id = :userID
 		ORDER BY scheduled_meeting_start_time";
     // Prepare the sql statement using PDO
     $stmt = $dbConn->prepare($sqlQuery);
 
     // Execute the query using PDO
-    $stmt->execute(array(':date' => $date));
+    $stmt->execute(array(':date' => $date, ':userID' => $userID));
 
     // Store data retrieved in an array
     $dayMeetings = array();
@@ -268,13 +274,13 @@ function displayDayHeader($date)
     echo "<div class=\"day-header\">".date("D", $date)."<br>".date("d", $date)."</div>";
 }
 
-function displayDayEvents($date)
+function displayDayEvents($date, $userID)
 {
     try
     {
         $dbConn = getConnection();
 
-        $events = array_merge(getDayClasses($dbConn, $date), getDayMeetings($dbConn, $date));
+        $events = array_merge(getDayClasses($dbConn, $date, $userID), getDayMeetings($dbConn, $date, $userID));
 
         for ($i = 0; $i < sizeof($events); $i++)
             {
@@ -301,19 +307,19 @@ function timeLengthToHeight($startTime, $endTime)
     return timeToPercentage($endTime - $startTime);
 }
 
-function getUpcomingDeadlines($dbConn)
+function getUpcomingDeadlines($dbConn, $userID)
 {
     // SQL query that retrieves the basic data for each event on the given day
     $sqlQuery = "SELECT user_id, tp_deadlines.deadline_id, deadline_type, deadline_desc, subject_name, deadline_date, deadline_time
     FROM tp_deadlines INNER JOIN tp_subject ON tp_deadlines.subject_id = tp_subject.subject_id 
     INNER JOIN tp_student_deadlines ON tp_student_deadlines.deadline_id = tp_deadlines.deadline_id 
-    WHERE user_id = '1'
+    WHERE user_id = :userID
     ORDER BY deadline_date";
     // Prepare the sql statement using PDO
     $stmt = $dbConn->prepare($sqlQuery);
 
     // Execute the query using PDO
-    $stmt->execute();
+    $stmt->execute(array(':userID' => $userID));
 
     // Store data retrieved in an array
     $studentDeadlines = array();
@@ -327,13 +333,13 @@ function getUpcomingDeadlines($dbConn)
     return $studentDeadlines;
 }
 
-function displayUpcomingDeadlines()
+function displayUpcomingDeadlines($userID)
 {
     try
     {
         $dbConn = getConnection();
 
-        $deadlines = getUpcomingDeadlines($dbConn);
+        $deadlines = getUpcomingDeadlines($dbConn, $userID);
         for ($i = 0; $i < sizeof($deadlines); $i++)
         {
             echo "<p class=\"deadline\" >".$deadlines[$i]->desc." ".$deadlines[$i]->date." ".$deadlines[$i]->time."</p>\n";

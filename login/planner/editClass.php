@@ -1,53 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit class</title>
-    <link href="style.css" rel="stylesheet" type="text/css">
-    <script src="plannerJSFunctions.js"></script>
-</head>
-<body>
-<a href="manageClasses.php">&#8592; Class list</a>
 <?php
 include("functions.php");
+include("../includes/functions.inc.php");
+checkLoggedIn();
 
 $name = isset($_REQUEST['name']) ? $_REQUEST['name'] : null;
 $subject = isset($_REQUEST['subject']) ? $_REQUEST['subject'] : null;
 $classID = isset($_REQUEST['classID']) ? $_REQUEST['classID'] : null;
 
-$error = false;
+$errors = [];
+$dbConn = getConnection();
 
 try {
-    $dbConn = getConnection();
-
-    try
-    {
-        // SQL query that updates a class
-        $sql = "UPDATE tp_class SET class_desc = :name, subject_id = :subject
+    // SQL query that updates a class
+    $sql = "UPDATE tp_class SET class_desc = :name, subject_id = :subject
         WHERE class_id = :classID";
 
-        // Prepare the sql statement using PDO
-        $stmt = $dbConn->prepare($sql);
+    // Prepare the sql statement using PDO
+    $stmt = $dbConn->prepare($sql);
 
-        // Execute the query using PDO
-        $stmt->execute(array(':name' => $name, ':subject' => $subject, ':classID' => $classID));
-    }
-    catch (Exception $e)
-    {
-        echo "<p>Query failed: ".$e->getMessage()."</p>\n";
-        $error = true;
-    }
-}
-catch (Exception $e)
-{
-    echo "<p>Failed to connect to database: ".$e->getMessage()."</p>\n";
-    $error = true;
+    // Execute the query using PDO
+    $stmt->execute(array(':name' => $name, ':subject' => $subject, ':classID' => $classID));
+} catch (Exception $e) {
+    array_push($errors, 'Query failed: ' . $e->getMessage());
 }
 
-if (!$error)
-{
+
+if (sizeof($errors) == 0) {
     header('Location: manageClasses.php');
+} else {
+    include("../includes/pagefunctions.inc.php");
+    echo pageStart("Edit class", "style.css");
+    echo createNav();
+    echo createBanner();
+    echo "<main>\n";
+    foreach ($errors as $error) {
+        echo "<p>" . $error . "</p>\n";
+    }
+    echo "<a href='manageClasses.php'>Back to class list</a>\n";
+    echo "</main>";
+    echo pageEnd();
 }
-
 ?>
-</body>

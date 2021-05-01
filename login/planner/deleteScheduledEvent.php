@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Delete class</title>
-    <link href="style.css" rel="stylesheet" type="text/css">
-</head>
-<body>
 <?php
-
 include("functions.php");
-
+include("../includes/functions.inc.php");
+checkLoggedIn();
 $eventID = filter_has_var(INPUT_GET, 'eventID')
     ? $_GET['eventID'] : null;
 $eventType = filter_has_var(INPUT_GET, 'eventType')
@@ -17,7 +9,7 @@ $eventType = filter_has_var(INPUT_GET, 'eventType')
 
 $dbConn = getConnection();
 
-$errors = false;
+$errors = [];
 
 try
 {
@@ -59,13 +51,25 @@ try
 
 }
 catch (Exception $e){
-    $errors = true;
-    echo "<p>Query failed: ".$e->getMessage()."</p>\n";
+    array_push($errors, 'Query failed: '.$e->getMessage());
 }
 
-if (!$errors)
+if (sizeof($errors) == 0)
 {
-    header("location: updateSuccessful.php?eventID=".$eventID."&eventType=".$eventType."&meetingID=".$meetingID);
+    header("location: updateSuccessful.php");
+}
+else{
+    include("../includes/pagefunctions.inc.php");
+    echo pageStart("Delete scheduled event", "style.css");
+    echo createNav();
+    echo createBanner();
+    echo "<main>\n";
+    foreach ($errors as $error)
+    {
+        echo "<p>".$error."</p>\n";
+    }
+    echo "<a href='plannerWeek.php'>Back to planner</a>\n";
+    echo "</main>";
+    echo pageEnd();
 }
 ?>
-</body>
