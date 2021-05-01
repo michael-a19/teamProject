@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Update successful</title>
-    <link href="style.css" rel="stylesheet" type="text/css">
-    <script src="plannerJSFunctions.js"></script>
-</head>
-<body>
-<a href="manageClasses.php">&#8592; Class list</a>
 <?php
+include("../includes/pagefunctions.inc.php");
+echo pageStart("Update successful", "style.css");
+echo createNav();
+echo createBanner();
 include("functions.php");
-
 ?>
-</body>
+<main>
+    <a href="manageClasses.php">Class list</a>
+    <p>Update successful</p>
+</main>
+<?php
+echo pageEnd();
+?>

@@ -1,12 +1,19 @@
-
 <?php
-include("../login/includes/pagefunctions.inc.php");
-echo pageStart("Planner", "style.css");
+include("../includes/pagefunctions.inc.php");
+echo pageStart("Planner", "style.css", "plannerJSFunctions.js");
 echo createNav();
 echo createBanner();
 require_once('functions.php');
 include('Event.php');
 include('Deadline.php');
+include("../includes/functions.inc.php");
+checkLoggedIn();
+$isTeacher = false;
+if(checkIfTeacher())
+{
+    $isTeacher = true;
+}
+
 $date = filter_has_var(INPUT_GET, 'date')
     ? $_GET['date'] : date("Y-m-d");
 $unixDate = strtotime($date);
@@ -32,8 +39,11 @@ $unixDate = strtotime($date);
                 ?>
                 <div class="add-event-btns">
                     <?php
-                    echo "<a href='addScheduledEventForm.php?eventType=class&date=".$date."'>Add scheduled class</a>\n";
-                    echo "<a href='addScheduledEventForm.php?eventType=meeting&date=".$date."'>Add scheduled meeting</a>\n";
+                    if ($isTeacher)
+                    {
+                        echo "<a href='addScheduledEventForm.php?eventType=class&date=".$date."'>Add scheduled class</a>\n";
+                        echo "<a href='addScheduledEventForm.php?eventType=meeting&date=".$date."'>Add scheduled meeting</a>\n";
+                    }
                     ?>
                 </div>
             </div>
@@ -72,7 +82,7 @@ $unixDate = strtotime($date);
                     <div class="day-wrapper">
                         <?php
                         displayDayColumn();
-                        displayDayEvents(date("Y-m-d", $unixDate));
+                        displayDayEvents(date("Y-m-d", $unixDate), $_SESSION['user_id']);
                         ?>
                     </div>
                 </div>
@@ -81,36 +91,38 @@ $unixDate = strtotime($date);
         <div class="upcoming-events">
             <h2>Upcoming dates</h2>
             <?php
-            displayUpcomingDeadlines();
+            displayUpcomingDeadlines($_SESSION['user_id']);
             ?>
         </div>
     </div>
-</main>
+    <script type="text/javascript">
+        /* When the user clicks on the button,
+        toggle between hiding and showing the dropdown content */
+        function toggleViewDropDown() {
+            document.getElementById("view-btn").classList.toggle("show");
+        }
 
-<script type="text/javascript">
-    /* When the user clicks on the button,
-    toggle between hiding and showing the dropdown content */
-    function toggleViewDropDown() {
-        document.getElementById("view-btn").classList.toggle("show");
-    }
+        function toggleShowDropdown()
+        {
+            document.getElementById("show-btn").classList.toggle("show");
+        }
 
-    function toggleShowDropdown()
-    {
-        document.getElementById("show-btn").classList.toggle("show");
-    }
-
-    // Close the dropdown if the user clicks outside of it
-    window.onclick = function(event) {
-        if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
                 }
             }
         }
-    }
-</script>
-</body>
+    </script>
+</main>
+<?php
+echo pageEnd();
+?>
+

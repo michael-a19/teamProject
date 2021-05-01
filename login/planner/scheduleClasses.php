@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Schedule classes</title>
-    <link href="style.css" rel="stylesheet" type="text/css">
-    <script src="plannerJSFunctions.js"></script>
-</head>
-<body>
-<a href="manageClasses.php">&#8592; Class list</a>
 <?php
+include("../includes/functions.inc.php");
+checkLoggedIn();
 include("functions.php");
+
 
 $day = isset($_REQUEST['day']) ? $_REQUEST['day'] : null;
 $startDate = isset($_REQUEST['startDate']) ? $_REQUEST['startDate'] : null;
@@ -43,6 +36,8 @@ if ($repeat == 2)
     $dayGap = 14;
 }
 
+$errors = [];
+
 try
 {
     $dbConn = getConnection();
@@ -68,12 +63,24 @@ try
 catch (Exception $e)
 {
     $dbConn->rollBack();
-    echo "<p>Query failed: ".$e->getMessage()."</p>\n";
-    $error = true;
+    array_push($errors, 'Query failed: '.$e->getMessage());
 }
-if (!$error)
+if (sizeof($errors) == 0)
 {
     header('Location: updateSuccessful.php');
 }
+else {
+    include("../includes/pagefunctions.inc.php");
+    echo pageStart("Schedule classes", "style.css");
+    echo createNav();
+    echo createBanner();
+    echo "<main>\n";
+    foreach ($errors as $error)
+    {
+        echo "<p>".$error."</p>\n";
+    }
+    echo "<a href='manageClasses.php'>Back to class list</a>\n";
+    echo "</main>";
+    echo pageEnd();
+}
 ?>
-</body>

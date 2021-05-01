@@ -115,6 +115,12 @@ function checkSessionVariable($key)
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="/login/planner/plannerWeek.php" class="nav-link">
+                            <img class="nav-img" src="/login/images/icons/chevronRight.svg">
+                            <span class="link-text">Planner</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="#" class="nav-link">
                             <img class ="nav-img" src="/login/images/icons/cog.svg">
                             <!--<img class ="nav-img" src="/group/login/images/icons/cog.svg">-->

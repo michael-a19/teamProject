@@ -1,32 +1,32 @@
-
 #class-members-rows-wrapper {
     display: flex;
     flex-direction: column;
-    border: solid green;
+    border: solid #CCCCCC;
     width: 50%;
+    background-color: white;
 }
 
 #class-members-columns-wrapper {
     display: flex;
     flex-direction: row;
-    border: solid blue;
+    border: solid #CCCCCC;
     width: 100%;
     height: 500px;
 }
 
 #class-members-left-column {
-    border: solid red;
+    border: solid #CCCCCC;
     width: 40%;
     position: relative;
 }
 
 #class-members-middle-column {
-    border: solid red;
+    border: solid #CCCCCC;
     width: 20%;
 }
 
 #class-members-right-column {
-    border: solid red;
+    border: solid #CCCCCC;
     width: 40%;
     position: relative;
 }

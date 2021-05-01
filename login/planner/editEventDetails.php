@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Edit event details</title>
-    <link href="style.css" rel="stylesheet" type="text/css">
-    <script src="plannerJSFunctions.js"></script>
-</head>
-<body>
-<a href="manageClasses.php">&#8592; Class list</a>
 <?php
 include("functions.php");
+include("../includes/functions.inc.php");
+checkLoggedIn();
 
 // generic fields
 $date = isset($_REQUEST['date']) ? $_REQUEST['date'] : null;
@@ -29,7 +21,7 @@ if (strcmp($eventType, "meeting") == 0)
     $meetingID = isset($_REQUEST['meetingID']) ? $_REQUEST['meetingID'] : null;
 }
 
-$error = false;
+$errors = [];
 
 if (strcmp($eventType, "class") == 0)
 {
@@ -50,8 +42,7 @@ if (strcmp($eventType, "class") == 0)
     }
     catch (Exception $e)
     {
-        echo "<p>Query failed: ".$e->getMessage()."</p>\n";
-        $error = true;
+        array_push($errors, 'Query failed: '.$e->getMessage());
     }
 }
 if (strcmp($eventType, "meeting") == 0)
@@ -89,13 +80,24 @@ if (strcmp($eventType, "meeting") == 0)
     catch (Exception $e)
     {
         $dbConn->rollBack();
-        echo "<p>Query failed: ".$e->getMessage()."</p>\n";
-        $error = true;
+        array_push($errors, 'Query failed: '.$e->getMessage());
     }
 }
-if (!$error)
+if (sizeof($errors) == 0)
 {
     header('Location: updateSuccessful.php');
 }
+else{
+    include("../includes/pagefunctions.inc.php");
+    echo pageStart("Edit event details", "style.css");
+    echo createNav();
+    echo createBanner();
+    echo "<main>\n";
+    foreach ($errors as $error)
+    {
+        echo "<p>".$error."</p>\n";
+    }
+    echo "</main>\n";
+    echo pageEnd();
+}
 ?>
-</body>
