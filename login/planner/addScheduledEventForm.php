@@ -15,7 +15,7 @@ $eventType = filter_has_var(INPUT_GET, 'eventType')
     ? $_GET['eventType'] : null;
 $date = filter_has_var(INPUT_GET, 'date')
     ? $_GET['date'] : date("Y-m-d");
-//$date = date("Y-m-d", $date);
+
 ?>
 <main>
     <form method="get" action="addScheduledEvent.php">

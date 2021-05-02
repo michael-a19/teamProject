@@ -47,6 +47,7 @@ checkLoggedIn();
                 <option value="6">Sunday</option>
             </select>
         </label>
+        <br>
         <label> Start date:
             <input type='date' name='startDate' required>
         </label>
@@ -70,6 +71,7 @@ checkLoggedIn();
         <?php
         echo "<input type='hidden' name='classID' value='".$classID."'>\n";
         ?>
+        <br>
         <input type='submit' value='Schedule classes'>
     </form>
 </main>

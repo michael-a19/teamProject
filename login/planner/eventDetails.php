@@ -31,8 +31,8 @@ if(checkIfTeacher())
         $dbConn = getConnection();
         $event = getEventDetails($dbConn, $eventID, $eventType);
         echo "<h2>".$event->desc."</h2>\n";
-        echo "<div>".$event->date."</div>\n";
-        echo "<div>".$event->start_time." - ".$event->end_time."</div>\n";
+        echo "<div>".date('d M, Y', strtotime($event->date))."</div>\n";
+        echo "<div>".date('H:i' , strtotime($event->start_time))." - ".date('H:i' , strtotime($event->end_time))."</div>\n";
         echo "<div>".$event->subject."</div>\n";
         echo "<div>Teachers: </div>\n";
         displayStaff($dbConn, $eventID, $eventType);

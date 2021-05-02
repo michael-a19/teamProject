@@ -8,69 +8,74 @@ $eventID = filter_has_var(INPUT_GET, 'eventID')
 $eventType = filter_has_var(INPUT_GET, 'eventType')
     ? $_GET['eventType'] : null;
 
-$dbConn = getConnection();
 
 $errors = [];
 
-try
+if (!sanitiseInt($eventID)) array_push($errors, "Event ID invalid");
+if (strcmp($eventType, 'class') != 0 && strcmp($eventType, 'meeting') != 0) array_push($errors, "Event type invalid");
+
+if (empty($errors))
 {
-    if (strcmp($eventType, "class") == 0)
+    try
     {
-        $sqlQuery = "DELETE FROM tp_scheduled_classes WHERE scheduled_class_id = :eventID";
+        $dbConn = getConnection();
+        if (strcmp($eventType, "class") == 0)
+        {
+            $sqlQuery = "DELETE FROM tp_scheduled_classes WHERE scheduled_class_id = :eventID";
 
-        // Prepare the sql statement using PDO
-        $stmt = $dbConn->prepare($sqlQuery);
+            // Prepare the sql statement using PDO
+            $stmt = $dbConn->prepare($sqlQuery);
 
-        // Execute the query using PDO
-        $stmt->execute(array(':eventID' => $eventID));
-    }
-    if (strcmp($eventType, "meeting") == 0)
-    {
-        $dbConn->beginTransaction();
+            // Execute the query using PDO
+            $stmt->execute(array(':eventID' => $eventID));
+        }
+        if (strcmp($eventType, "meeting") == 0)
+        {
+            $dbConn->beginTransaction();
 
-        $meetingID = getClassOrMeetingID($dbConn, $eventID, 'meeting');
+            $meetingID = getClassOrMeetingID($dbConn, $eventID, 'meeting');
 
-        $sqlQuery = "DELETE FROM tp_scheduled_meetings WHERE scheduled_meeting_id = :eventID";
+            $sqlQuery = "DELETE FROM tp_scheduled_meetings WHERE scheduled_meeting_id = :eventID";
 
-        // Prepare the sql statement using PDO
-        $stmt = $dbConn->prepare($sqlQuery);
+            // Prepare the sql statement using PDO
+            $stmt = $dbConn->prepare($sqlQuery);
 
-        // Execute the query using PDO
-        $stmt->execute(array(':eventID' => $eventID));
+            // Execute the query using PDO
+            $stmt->execute(array(':eventID' => $eventID));
 
-        $sqlQuery = "DELETE FROM tp_meeting
+            $sqlQuery = "DELETE FROM tp_meeting
         WHERE meeting_id = :meetingID";
 
-        // Prepare the sql statement using PDO
-        $stmt = $dbConn->prepare($sqlQuery);
+            // Prepare the sql statement using PDO
+            $stmt = $dbConn->prepare($sqlQuery);
 
-        // Execute the query using PDO
-        $stmt->execute(array(':meetingID' => $meetingID));
+            // Execute the query using PDO
+            $stmt->execute(array(':meetingID' => $meetingID));
 
-        $dbConn->commit();
+            $dbConn->commit();
+        }
+
+    }
+    catch (Exception $e){
+        array_push($errors, 'Query failed: '.$e->getMessage());
     }
 
-}
-catch (Exception $e){
-    array_push($errors, 'Query failed: '.$e->getMessage());
-}
-
-if (sizeof($errors) == 0)
-{
-    header("location: updateSuccessful.php");
-}
-else{
-    include("../includes/pagefunctions.inc.php");
-    echo pageStart("Delete scheduled event", "style.css");
-    echo createNav();
-    echo createBanner();
-    echo "<main>\n";
-    foreach ($errors as $error)
+    if (empty($errors))
     {
-        echo "<p>".$error."</p>\n";
+        header("location: updateSuccessful.php");
     }
-    echo "<a href='plannerWeek.php'>Back to planner</a>\n";
-    echo "</main>";
-    echo pageEnd();
 }
+include("../includes/pagefunctions.inc.php");
+echo pageStart("Delete scheduled event", "style.css");
+echo createNav();
+echo createBanner();
+echo "<main>\n";
+foreach ($errors as $error)
+{
+    echo "<p>".$error."</p>\n";
+}
+echo "<a href='plannerWeek.php'>Back to planner</a>\n";
+echo "</main>";
+echo pageEnd();
+
 ?>

@@ -63,11 +63,11 @@ checkLoggedIn();
                 $dbConn = getConnection();
 
                 $sqlQuery = "SELECT meeting_desc, subject_name, tp_meeting.subject_id
-		    FROM tp_meeting
-		    INNER JOIN tp_subject
-		    ON tp_subject.subject_id = tp_meeting.subject_id
-		    WHERE meeting_id = :meeting_id
-		    ";
+		        FROM tp_meeting
+		        INNER JOIN tp_subject
+		        ON tp_subject.subject_id = tp_meeting.subject_id
+		        WHERE meeting_id = :meeting_id
+		        ";
                 // Prepare the sql statement using PDO
                 $stmt = $dbConn->prepare($sqlQuery);
 

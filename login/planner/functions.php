@@ -342,7 +342,8 @@ function displayUpcomingDeadlines($userID)
         $deadlines = getUpcomingDeadlines($dbConn, $userID);
         for ($i = 0; $i < sizeof($deadlines); $i++)
         {
-            echo "<p class=\"deadline\" >".$deadlines[$i]->desc." ".$deadlines[$i]->date." ".$deadlines[$i]->time."</p>\n";
+            echo "<p class=\"deadline\" >".$deadlines[$i]->desc." ".date("d M, Y", strtotime($deadlines[$i]->date))." 
+            ".date("H:i",  strtotime($deadlines[$i]->time))."</p>\n";
         }
     }
     catch (Exception $e){
@@ -403,5 +404,39 @@ function displayClassSelectOptions()
     catch (Exception $e){
         echo "<p>Query failed: ".$e->getMessage()."</p>\n";
     }
+}
+
+function sanitiseString(&$var)
+{
+    if (!empty($var) && strlen($var) < 50)
+    {
+        $var = trim($var);
+        $tempVar = filter_var($var, FILTER_SANITIZE_STRING);
+        if (strcmp($var, $tempVar) != 0) return false;
+        return true;
+    }
+    return false;
+}
+
+function sanitiseInt(&$var)
+{
+    if (!empty($var) && strlen($var) < 50 && filter_var($var, FILTER_VALIDATE_INT))
+    {
+        $var = trim($var);
+        return true;
+    }
+    return false;
+}
+
+function sanitiseDate(&$var)
+{
+    $var = trim($var);
+    return preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $var);
+}
+
+function sanitiseTime($var)
+{
+    $var = trim($var);
+    return preg_match("/^([01]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$/", $var);
 }
 ?>

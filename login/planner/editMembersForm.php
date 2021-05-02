@@ -76,13 +76,12 @@ include("functions.php");
 
         function selectedToRemove()
         {
+            var options = document.getElementById('right-select-list').options;
+            for (let i = options.length - 1; i >= 0; i--)
             {
-                var options = document.getElementById('right-select-list').options;
-                for (let i = 0; i < options.length; i++) {
-                    if (options[i].selected)
-                    {
-                        options.remove(i);
-                    }
+                if (options[i].selected)
+                {
+                    options.remove(i);
                 }
             }
         }
@@ -134,7 +133,7 @@ include("functions.php");
         <form method="post" action="editMembers.php" onsubmit="selectAllRightList()">
             <div id="class-members-filters">
                 <label> Yr group:
-                    <input id="year-group" type="number" name="yearGroup" min=7 max=13>
+                    <input id="year-group" type="number" name="yearGroup" min=7 max=13 value="7">
                 </label>
                 <label> User type:
                     <select id="user-type" onchange="toggleYearGroup()">
