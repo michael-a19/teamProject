@@ -4,6 +4,7 @@
     border: solid #CCCCCC;
     width: 50%;
     background-color: white;
+    min-width: 70%;
 }
 
 #class-members-columns-wrapper {
@@ -23,6 +24,11 @@
 #class-members-middle-column {
     border: solid #CCCCCC;
     width: 20%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
 }
 
 #class-members-right-column {
@@ -39,4 +45,16 @@
 #right-select-list {
     height: 100%;
     width: 100%;
+}
+
+#selected-to-right-list {
+    padding: 5px 20px 5px 20px;
+}
+
+#selected-to-left-list {
+    padding: 5px 20px 5px 20px;
+}
+
+#update-members-list {
+    padding: 3%;
 }

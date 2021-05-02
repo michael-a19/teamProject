@@ -150,9 +150,15 @@ include("functions.php");
                     </select>
                 </div>
                 <div id="class-members-middle-column">
-                    <input type="button" id="selected-to-right-list" onclick="selectedToRightList()" value ="&#8594;"><br>
-                    <input type="button" id="selected-to-left-list" onclick="selectedToRemove()" value="&#8592;"><br>
-                    <input type="submit" id="update-members-list" value="Apply changes">
+                    <div id="selected-to-left-right-div">
+                        <input type="button" id="selected-to-right-list" onclick="selectedToRightList()" value ="&#8594;">
+                    </div>
+                    <div id="selected-to-left-list-div">
+                        <input type="button" id="selected-to-left-list" onclick="selectedToRemove()" value="&#8592;">
+                    </div>
+                    <div id="update-members-list-div">
+                        <input type="submit" id="update-members-list" value="Apply changes">
+                    </div>
                 </div>
                 <div id="class-members-right-column">
                     <select id="right-select-list" multiple name="groupMembers[]">
