@@ -15,17 +15,16 @@
 
     ///get details of the logged in user 
     $query = "SELECT * FROM tp_users WHERE user_id = :userID LIMIT 1"; 
-    $params['userID'] = $_SESSION['user_id']; //
+    $params['userID'] = $_SESSION['user_id']; 
 
 
     $userDetails = $recset->getRecordSet($query, $params); 
     if(is_array($userDetails))
     {
         $userDetails = $userDetails[0]; 
-        //set main to calc 100vh - 5rem
-        $pageContent = <<<FORM
         
-
+        $pageContent = <<<FORM
+    
             <div id="main-heading">
                 <h1>Update your profile details</h1>
             </div>
@@ -53,7 +52,7 @@
                 </form>
                         
             </div>
-    FORM;
+FORM;
     }
     else
     {
