@@ -119,10 +119,10 @@ function checkSessionVariable($key)
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="../forum/forum.php" class="nav-link">
                         <img class="nav-img" src="/login/images/icons/chevronRight.svg">
                          <!--   <img class="nav-img" src="/group/login/images/icons/chevronRight.svg">-->
-                            <span class="link-text">option 1</span>
+                            <span class="link-text">Forum</span>
                         </a>
                     </li>
                     <li class="nav-item">
