@@ -7,7 +7,7 @@
      * Teachers can click on any class they teach and be directed to a page that displays all students in that class
      * Students can not access this page, if a student tries they will be redirected to the main chat page
      */
-    session_start();
+    session_start(); 
 
 
     include_once("../classes/recordset.class.php");
@@ -108,7 +108,7 @@
     else
     {
         //no classes found 
-        $classList .= "you have no classes <a href='/login/planner/manageClasses.php'>create one</a>"; 
+        $classList .= "<div id='error-text>'you have no classes <a href='/login/planner/manageClasses.php'>create one</a></div>"; 
         
     }
     //if any errors occured show at the top of the class details section of the page

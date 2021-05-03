@@ -2,8 +2,7 @@
  * @author Michael Anderson
  * @author W18032122
  */
-//add event listener to prevent js loading until page does 
-// window.addEventListener('load', (event) => {
+
 
 /**
  * function to select an element by it's ID

@@ -17,6 +17,16 @@
     --hover-color:rgb(121, 121, 121);
     
 }
+.error-text{
+ display: flex;
+ align-items: center; 
+ color: white; 
+ width: 100%;
+}
+.error-text a{
+    text-decoration: none; 
+    color: white; 
+   }
 #chat-error {
     width: 80%; 
     min-height: 50px;

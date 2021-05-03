@@ -8,11 +8,15 @@
      * @param Stirng path to js file
      */
 function pageStart($title, $css="", $js = "") {
-  
+    $cssLink = "";
     $jsLink = ""; 
     if(!empty($js))
     {
         $jsLink = "<script src={$js} type='text/javascript'></script>";
+    }
+    if(!empty($css))
+    {
+        $cssLink = "<link rel='stylesheet' href=$css type='text/css'>";
     }
     $pageStart = <<<START
     <!DOCTYPE HTML>
@@ -23,7 +27,7 @@ function pageStart($title, $css="", $js = "") {
             <title>$title</title>
 
             <link rel="stylesheet" href="/login/styles/style.css" type="text/css">
-            <link rel="stylesheet" href=$css type="text/css">
+            $cssLink
             <link rel="preconnect" href="https://fonts.gstatic.com">
             <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300&family=Shadows+Into+Light&display=swap" rel="stylesheet">
             <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">

@@ -1,17 +1,17 @@
 <?php 
+    //create page and form to allow a user to change their password 
+    session_start();
+    include_once('./classes/recordset.class.php'); 
+    include_once("./includes/pagefunctions.inc.php"); 
+    include_once("./includes/functions.inc.php"); 
+    //check if the user is logged in, if not redirect to login page
+    checkLoggedIn();
 
-session_start();
-include_once('./classes/recordset.class.php'); 
-include_once("./includes/pagefunctions.inc.php"); 
-include_once("./includes/functions.inc.php"); 
-//check if the user is logged in, if not redirect to login page
-checkLoggedIn(); //this could check the userID not logged in 
+    //db connection
+    $recset = new RecordSet("../logindb.sqlite");
 
-//db connection
-$recset = new RecordSet("../logindb.sqlite");
-
-$pageContent = "";
-
+    $pageContent = "";
+    //create the form for the user
     $pageContent = <<<FORM
         <div id="main-heading">
             <h1>Update password</h1>
@@ -37,14 +37,14 @@ $pageContent = "";
 FORM;
 
 echo pageStart('Update profile', "./styles/style.css");
-//echo pageBanner(); move this banner into page banner and conditionally load the content, just keep logo if not logged in
+
 echo createNav();
 echo createBanner();
 echo "<main>";
 echo notifcaitonBanner();
 echo generateFormError();
 
-
+//display the page content
 echo $pageContent;
 echo "</main>";
 pageEnd();

@@ -1,6 +1,8 @@
 <?php
+    //Script to create a new page and form to allow a new user to be registered
     session_start(); 
 
+    //check if the user is already logged in
     if( isset($_SESSION['user_id']) ){
         //redirect to homepage if already logged in
         header('location: ./index.php');
@@ -53,27 +55,23 @@
 </main>
 
     <script>
-        //validate stuff trim and that 
+        //function to get an element by its id
         function getElement(id){
             return document.getElementById(id);
         }
+
         //get submit button
         let buttons = getElement('form-button');
+
         //add event listener to the buttton
         buttons.addEventListener('click', function(event) {
             if(!validateForm('account-form'))
             {
-                console.log('errors');
-                //if comes back false there are empty fields 
                 event.preventDefault(); 
-                //prevent submission and show error
+                //prevent submission
             }
-            
-            //if no erros tehn submit allowed
-            
         });
         //front end validation 
-        //have script validation too
         function validateForm(formID){
             //get form
             let myForm = getElement(formID); 
@@ -81,7 +79,7 @@
             let inputs = myForm.getElementsByTagName("input");
             //define string to hold errors (will remove and assign tooltips to imputs maybe or show erroes on page)
             let errors = ""
-            //check if each element is empty 
+            //check if each element is empty, if so set indicators to alert user to empty fields
             for(let i = 0; i < inputs.length; i++){
                 if(inputs[i].value === "" || inputs[i] === " "){
                     errors += "empty " + inputs[i].name + " field "; 
@@ -90,13 +88,12 @@
                     inputs[i].setAttribute('placeholder', "* Required Field");
                 }
             }
-            
+            //if errors occured then return false
             if(errors != ""){
-                //replace the alert with something better 
-                alert(errors);  //remove this section alltogether 
                 return false;
             }
             else {
+                //return true if no errors
                 return true; //no errors
             }
             
