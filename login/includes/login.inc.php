@@ -1,4 +1,5 @@
 <?php
+    //Script to verify a users login attempt
     //start session 
     session_start();
    
@@ -68,7 +69,6 @@
                 if(password_verify($data['password'], $res['user_password']))
                 {
                     //if passwords is correct then login user and set session variables and redirect to homepage
-                    //$_SESSION['loggedIn'] = True;
                     $_SESSION['user_id']       = $res['user_id'];
                     $_SESSION['user_forename'] = $res['user_forename'];
                     $_SESSION['user_surname']  = $res['user_surname'];
@@ -80,7 +80,6 @@
                         $params = array();
                         $params = array("userID"=>$res['user_id']);
                         $res = $recset->getRecordSet($setOnline, $params);
-                        //put try catch right around the relocate and shit to check 
                         //redirect to index page after loggin in
                         header("location: ../index.php");
                         //prevent code below being ran after redirect which may override this redirect

@@ -1,6 +1,7 @@
 <?php
+//Script used to register a new user in the database
     session_start();
-    //include database connection object 
+
     include_once('../classes/recordset.class.php');
     include_once("../includes/functions.inc.php");
 
@@ -29,7 +30,6 @@
         //check if empty and the REST OF The validation!!!
         if(!empty($data['fname'])) 
         {
-            /* need to sanitise with filter var  */
             //check the length is greater than 3
             if(strlen($data['fname']) < 3) 
             {
@@ -152,7 +152,6 @@
     else
     {
         //if request method is not post then acess to script did not come from form
-        //send to 404 page or just to register page?
         $error .= "ERROR</br>to create an account use form";
     }
     //if script gets to this point the login failed so return to register page and show  error message 

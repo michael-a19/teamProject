@@ -1,6 +1,6 @@
 <?php 
+    //script to update the password of the logged in user
     session_start(); 
-    //include
     include_once("./functions.inc.php");
     include_once('../classes/recordset.class.php');
     checkLoggedIn();

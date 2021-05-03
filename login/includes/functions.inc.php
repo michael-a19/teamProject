@@ -24,10 +24,6 @@
     function checkLoggedIn(){
         if(!isset($_SESSION['user_id'])) 
         {
-            // //not logged in unset any session data and go to login function
-            // session_unset(); 
-            // header('location: /login/login.php'); //this needs changed to the absolute path of login****************************
-            // die(); //prevents the rest of the script from running after the redirect 
             redirectToLogin();
         }
     }

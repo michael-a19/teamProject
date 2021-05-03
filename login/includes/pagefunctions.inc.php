@@ -1,5 +1,12 @@
 <?php 
+    //functions used to create a html page
 
+    /**
+     * Function to create the starting html of a page
+     * @param Stirng page title
+     * @param Stirng PATH TO CSS FILE
+     * @param Stirng path to js file
+     */
 function pageStart($title, $css="", $js = "") {
   
     $jsLink = ""; 
@@ -29,6 +36,9 @@ START;
     return $pageStart; 
 }
 
+/**
+ * Function to create the ending of the html
+ */
 function pageEnd(){
     $pageEnd = <<<END
            </div>
@@ -38,13 +48,14 @@ END;
     return $pageEnd;
 }
 
-
+/**
+ * Generates an displays an error if one occures
+ */
 function generateFormError(){
     $error = ""; 
     if(isset($_SESSION['error']))
     {
         $errorMsg = $_SESSION['error'];
-        //unset to prevent error persisting after page refresh
         unset($_SESSION['error']);
         $error = <<<ERROR
                 <div id='error-banner'>
@@ -55,6 +66,9 @@ ERROR;
     return $error;
 }
 
+/**
+ * Creates a notification bar to display notifications similar to the error bar
+ */
 function notifcaitonBanner() {
     $notifcation = ""; 
     if(isset($_SESSION['notifcation']))
@@ -80,7 +94,7 @@ function checkSessionVariable($key)
 
 
     /**
-     * function to create the navigation bar for the website [change the absolute path of the images if change directory name]
+     * function to create the navigation bar for the website
      */
     function createNav(){
         $teacherOption = "";

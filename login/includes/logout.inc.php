@@ -1,4 +1,5 @@
 <?php 
+    //script to log out a user
     session_start(); 
     include_once('../classes/recordset.class.php');
     $recset = new RecordSet();
@@ -13,11 +14,9 @@
         }
         catch(Exception $e)
         {
-            //log error to error file?
-            //$error .= "Internal Server Error Can't log user in" . $e->getMessage() . "</br>";
+            //log error to error file
         }
     }
     session_unset();
     session_destroy();
-    //set user to offline here
     header("location: /login/login.php");

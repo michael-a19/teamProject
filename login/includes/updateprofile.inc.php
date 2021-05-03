@@ -1,4 +1,5 @@
 <?php 
+    //script to update the profile details of the logged in user
     session_start(); 
     //include
     include_once("./functions.inc.php");
@@ -19,14 +20,12 @@
         $data['fname']     = (isset($_REQUEST['fname']))     ? validateInput($_REQUEST['fname'])     : ""; //add the trim here 
         $data['lname']     = (isset($_REQUEST['lname']))     ? validateInput($_REQUEST['lname'])     : "";
         $data['email']     = (isset($_REQUEST['email']))     ? validateInput($_REQUEST['email'])     : "";
-        //$data['password']  = (isset($_REQUEST['password']))  ? validateInput($_REQUEST['password'])  : "";
         $data['password']  = (isset($_REQUEST['password']))  ? ($_REQUEST['password'])  : "";
 
         
         //check if empty and the REST OF The validation!!!
         if(!empty($data['fname'])) 
         {
-            /* need to sanitise with filter var  */
             //check the length is greater than 3
             if(strlen($data['fname']) < 1) 
             {
@@ -85,7 +84,6 @@
         if(empty($error))
         {   
             //get user password to confirm changes 
-            //"SELECT tp_users.user_password from tp_users where tp_users.user_email = :email"; 
             $checkQuery = "SELECT tp_users.user_password from tp_users where tp_users.user_id = :userID limit 1";  //="SELECT tp_users.user_forename FROM tp_users WHERE tp_users.user_email = :email"; 
             $checkParam['userID'] = $_SESSION['user_id'];
 
