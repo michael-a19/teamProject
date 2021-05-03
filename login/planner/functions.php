@@ -32,10 +32,9 @@ function getDayClasses($dbConn, $date, $userID)
     // Execute the query using PDO
     $stmt->execute(array(':date' => $date, ':userID' => $userID));
 
-    // Store data retrieved in an array
+    // Store data retrieved in an array of Event objects
     $dayClasses = array();
     $i = 0;
-
     while ($rowObj = $stmt->fetchObject()) {
         $dayClasses[$i] = new Event($rowObj->class_desc, $rowObj->scheduled_class_start_time, $rowObj->scheduled_class_end_time,
             $rowObj->scheduled_class_date, $rowObj->subject_name, "class", $rowObj->scheduled_class_id);
@@ -64,10 +63,9 @@ function getDayMeetings($dbConn, $date, $userID)
     // Execute the query using PDO
     $stmt->execute(array(':date' => $date, ':userID' => $userID));
 
-    // Store data retrieved in an array
+    // Store data retrieved in an array of Event objects
     $dayMeetings = array();
     $i = 0;
-
     while ($rowObj = $stmt->fetchObject()) {
         $dayMeetings[$i] = new Event($rowObj->meeting_desc, $rowObj->scheduled_meeting_start_time, $rowObj->scheduled_meeting_end_time,
             $rowObj->scheduled_meeting_date, $rowObj->subject_name, "meeting", $rowObj->scheduled_meeting_id);
@@ -93,7 +91,7 @@ function getClassOrMeetingID($dbConn, $eventID, $eventType)
         // Execute the query using PDO
         $stmt->execute(array(':eventID' => $eventID));
 
-        // Store data retrieved in an Event object
+        // Return the class id
         while ($rowObj = $stmt->fetchObject())
         {
             return $rowObj->class_id;
@@ -114,7 +112,7 @@ function getClassOrMeetingID($dbConn, $eventID, $eventType)
         // Execute the query using PDO
         $stmt->execute(array(':eventID' => $eventID));
 
-        // Store data retrieved in an Event object
+        // Return the class id
         while ($rowObj = $stmt->fetchObject())
         {
             return $rowObj->meeting_id;
@@ -215,7 +213,7 @@ function displayStaff($dbConn, $eventID, $eventType)
             // Execute the query using PDO
             $stmt->execute(array(':eventID' => $eventID));
 
-            // Store data retrieved in an array
+            // Echo retrieved teacher info
             while ($rowObj = $stmt->fetchObject())
             {
                 echo "<div>".$rowObj->user_forename." ".$rowObj->user_surname."</div>";
@@ -247,7 +245,7 @@ function displayStaff($dbConn, $eventID, $eventType)
             // Execute the query using PDO
             $stmt->execute(array(':eventID' => $eventID));
 
-            // Store data retrieved in an array
+            // Echo retrieved teacher info
             while ($rowObj = $stmt->fetchObject())
             {
                 echo "<div>".$rowObj->user_forename." ".$rowObj->user_surname."</div>";
@@ -282,6 +280,7 @@ function displayDayEvents($date, $userID)
 
         $events = array_merge(getDayClasses($dbConn, $date, $userID), getDayMeetings($dbConn, $date, $userID));
 
+        // Display each event using its length in time to determine its height in the timetable
         for ($i = 0; $i < sizeof($events); $i++)
             {
                 $startTime = 60 * (int)date('H', strtotime($events[$i]->start_time)) + (int)date('i', strtotime($events[$i]->start_time));
@@ -309,7 +308,7 @@ function timeLengthToHeight($startTime, $endTime)
 
 function getUpcomingDeadlines($dbConn, $userID)
 {
-    // SQL query that retrieves the basic data for each event on the given day
+    // SQL query that retrieves the basic data for a user's associated deadlines
     $sqlQuery = "SELECT user_id, tp_deadlines.deadline_id, deadline_type, deadline_desc, subject_name, deadline_date, deadline_time
     FROM tp_deadlines INNER JOIN tp_subject ON tp_deadlines.subject_id = tp_subject.subject_id 
     INNER JOIN tp_student_deadlines ON tp_student_deadlines.deadline_id = tp_deadlines.deadline_id 
@@ -321,10 +320,9 @@ function getUpcomingDeadlines($dbConn, $userID)
     // Execute the query using PDO
     $stmt->execute(array(':userID' => $userID));
 
-    // Store data retrieved in an array
+    // Store data retrieved in a Deadline object
     $studentDeadlines = array();
     $i = 0;
-
     while ($rowObj = $stmt->fetchObject()) {
         $studentDeadlines[$i] = new Deadline($rowObj->deadline_id, $rowObj->deadline_type, $rowObj->deadline_desc,
             $rowObj->subject_name, $rowObj->deadline_date, $rowObj->deadline_time);
@@ -340,6 +338,8 @@ function displayUpcomingDeadlines($userID)
         $dbConn = getConnection();
 
         $deadlines = getUpcomingDeadlines($dbConn, $userID);
+
+        // Display each deadline retrieved
         for ($i = 0; $i < sizeof($deadlines); $i++)
         {
             echo "<p class=\"deadline\" >".$deadlines[$i]->desc." ".date("d M, Y", strtotime($deadlines[$i]->date))." 
@@ -357,6 +357,7 @@ function displaySubjectSelectOptions($default)
     {
         $dbConn = getConnection();
 
+        // SQL query that retrieves all subject names and ids
         $sqlQuery = "SELECT subject_name, subject_id
 		FROM tp_subject
 		ORDER BY subject_name";
@@ -366,6 +367,7 @@ function displaySubjectSelectOptions($default)
         // Execute the query using PDO
         $stmt->execute();
 
+        // Echo the option values for a select tag for the subject
         while ($rowObj = $stmt->fetchObject()) {
             if ($default == $rowObj->subject_id)
             {
@@ -387,6 +389,7 @@ function displayClassSelectOptions()
     {
         $dbConn = getConnection();
 
+        // SQL query that retrieves the class descriptions and ids
         $sqlQuery = "SELECT class_desc, class_id
 		FROM tp_class
 		ORDER BY class_desc";
@@ -396,6 +399,7 @@ function displayClassSelectOptions()
         // Execute the query using PDO
         $stmt->execute();
 
+        // Echo the option values for a select tag for the class
         while ($rowObj = $stmt->fetchObject())
         {
             echo "<option value='".$rowObj->class_id."'>".$rowObj->class_desc."</option>\n";

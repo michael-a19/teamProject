@@ -13,6 +13,7 @@ include("functions.php");
     <script type="text/javascript">
         var userList = [];
 
+        // Displays the users filtered by year group and user type
         function displayFilteredUsers()
         {
             var yearGroup = document.getElementById('year-group').value;
@@ -20,7 +21,6 @@ include("functions.php");
             var html = '';
             for (let i = 0; i < userList.length; i++)
             {
-                console.log("userTypeID: " + userTypeID + " yearGroup: " + yearGroup);
                 if ((userTypeID == 2 && userList[i].userType == 2) || (userTypeID == 1 && userTypeID == userList[i].userType && yearGroup == userList[i].yearGroup))
                 {
                     html += "<option data-surname='" + userList[i].surname +
@@ -34,6 +34,7 @@ include("functions.php");
             document.getElementById("left-select-list").innerHTML = html;
         }
 
+        // Add the selected users from the left list to the right list
         function selectedToRightList()
         {
             var leftSelectedUsers = [];
@@ -74,6 +75,7 @@ include("functions.php");
             }
         }
 
+        // Remove the selected users from the right list
         function selectedToRemove()
         {
             var options = document.getElementById('right-select-list').options;
@@ -86,6 +88,7 @@ include("functions.php");
             }
         }
 
+        // Set the year group select field to disabled or enabled
         function toggleYearGroup()
         {
             if (document.getElementById('user-type').value == 2)
@@ -98,6 +101,7 @@ include("functions.php");
             }
         }
 
+        // Select all users in the right list (needs to be selected before submitting)
         function selectAllRightList()
         {
             var options = document.getElementById('right-select-list').options;
@@ -283,6 +287,7 @@ include("functions.php");
 
             echo "<script type=\"text/javascript\">";
 
+            // Store the retrieved data in a Person object
             while ($rowObj = $stmt->fetchObject()) {
                 echo "userList.push(new Person('".$rowObj->user_surname."', '".$rowObj->user_forename."', 
             ".$rowObj->user_id.", ".$rowObj->user_year_group.", ".$rowObj->user_type_id."));\n";

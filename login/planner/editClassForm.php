@@ -23,12 +23,13 @@ checkLoggedIn();
         {
             $dbConn = getConnection();
 
+            // SQL query to retrieve the class info
             $sqlQuery = "SELECT class_desc, subject_name, tp_class.subject_id
-		FROM tp_class
-		INNER JOIN tp_subject
-		ON tp_subject.subject_id = tp_class.subject_id
-		WHERE class_id = :class_id
-		";
+		    FROM tp_class
+		    INNER JOIN tp_subject
+		    ON tp_subject.subject_id = tp_class.subject_id
+		    WHERE class_id = :class_id
+		    ";
             // Prepare the sql statement using PDO
             $stmt = $dbConn->prepare($sqlQuery);
 

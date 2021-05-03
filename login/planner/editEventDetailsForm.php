@@ -62,6 +62,7 @@ checkLoggedIn();
             try {
                 $dbConn = getConnection();
 
+                // SQL query that retrieves some meeting info
                 $sqlQuery = "SELECT meeting_desc, subject_name, tp_meeting.subject_id
 		        FROM tp_meeting
 		        INNER JOIN tp_subject
