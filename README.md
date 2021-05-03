@@ -3,8 +3,8 @@
 ### Group members  
 * Michael Anderson - chat section 
 * Cameron Brodgen - Quiz section 
-* Katherine Boyfield  
-* Jack Crosthwaite  
+* Katherine Boyfield - planner / manage classes 
+* Jack Crosthwaite - forum
 
 ## installation instructions 
 This project is currently installed on the university newnumyspace. 
