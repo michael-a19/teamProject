@@ -45,9 +45,9 @@ if (empty($errors))
             $dbConn = getConnection();
             // SQL query that updates a scheduled class
             $sql = "UPDATE tp_scheduled_classes
-        SET scheduled_class_date = :date, scheduled_class_start_time = :startTime, 
-        scheduled_class_end_time = :endTime
-        WHERE scheduled_class_id = :eventID";
+            SET scheduled_class_date = :date, scheduled_class_start_time = :startTime, 
+            scheduled_class_end_time = :endTime
+            WHERE scheduled_class_id = :eventID";
 
             // Prepare the sql statement using PDO
             $stmt = $dbConn->prepare($sql);
@@ -70,9 +70,9 @@ if (empty($errors))
 
             // SQL query that updates a scheduled meeting
             $sql = "UPDATE tp_scheduled_meetings
-        SET scheduled_meeting_date = :date, scheduled_meeting_start_time = :startTime, 
-        scheduled_meeting_end_time = :endTime
-        WHERE scheduled_meeting_id = :eventID";
+            SET scheduled_meeting_date = :date, scheduled_meeting_start_time = :startTime, 
+            scheduled_meeting_end_time = :endTime
+            WHERE scheduled_meeting_id = :eventID";
 
             // Prepare the sql statement using PDO
             $stmt = $dbConn->prepare($sql);
@@ -82,7 +82,7 @@ if (empty($errors))
 
             // SQL query that updates a meeting
             $sql = "UPDATE tp_meeting SET meeting_desc = :desc, subject_id = :subject
-        WHERE meeting_id = :meetingID";
+            WHERE meeting_id = :meetingID";
 
             // Prepare the sql statement using PDO
             $stmt = $dbConn->prepare($sql);

@@ -35,6 +35,14 @@ if (empty($errors))
 
             $meetingID = getClassOrMeetingID($dbConn, $eventID, 'meeting');
 
+            $sqlQuery = "DELETE FROM tp_meeting_members WHERE meeting_id = :meetingID";
+
+            // Prepare the sql statement using PDO
+            $stmt = $dbConn->prepare($sqlQuery);
+
+            // Execute the query using PDO
+            $stmt->execute(array(':meetingID' => $meetingID));
+
             $sqlQuery = "DELETE FROM tp_scheduled_meetings WHERE scheduled_meeting_id = :eventID";
 
             // Prepare the sql statement using PDO
@@ -44,7 +52,7 @@ if (empty($errors))
             $stmt->execute(array(':eventID' => $eventID));
 
             $sqlQuery = "DELETE FROM tp_meeting
-        WHERE meeting_id = :meetingID";
+            WHERE meeting_id = :meetingID";
 
             // Prepare the sql statement using PDO
             $stmt = $dbConn->prepare($sqlQuery);
