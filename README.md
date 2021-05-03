@@ -14,3 +14,4 @@ This project is a web based project written in PHP to re-install this project:
 <li> The website has different content for different users. A teacher user has different content to a student so a login for each has been provided with in the file submission for this project </li> 
 
 
+The login folder is the name the website was developed under, login because it started as the group login system and grew from there - near completion the name was changed to Doctrina the latin for knowledge at this point the contents of the login file were copied to the new doctrina file and we thought it was best to not delete the old file to preserve commit history 
