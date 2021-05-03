@@ -95,6 +95,11 @@
                 //for each student found in class print details 
                 foreach($classStudents as $studentRecord)
                 {
+                    //if the user id is equal to current user skip to next record
+                    if($studentRecord['user_id'] == $_SESSION['user_id'])
+                    {
+                        continue;
+                    }
                    $contactSection .= studentComponent($studentRecord, $classID);
                 }
             }

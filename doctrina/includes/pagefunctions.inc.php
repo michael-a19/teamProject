@@ -118,13 +118,13 @@ function checkSessionVariable($key)
                     <li class="menu-icon" id="menu-button">
                         <span class="nav-link">
                             <img class="burger-img" src="/doctrina/images/icons/burger.svg">
-                            <span class="link-text">A P P - N A M E </span>
+                            <span class="link-text">D O C T R I N A</span>
                         </span>
                     </li>
                     <li class="nav-item">
-                        <a href="/doctrina/quiz/classeslist.php" class="nav-link">
+                        <a href="/doctrina/worksheet_system/class_list.php" class="nav-link">
                             <img class="nav-img" src="/doctrina/images/icons/chevronRight.svg">
-                            <span class="link-text">Class quiz</span>
+                            <span class="link-text">Class worksheets</span>
                         </a>
                     </li>
                     <li class="nav-item">
