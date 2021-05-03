@@ -1,0 +1,182 @@
+body {
+    margin: 0;
+}
+
+main {
+    background-color: white;
+}
+
+a {
+    color: #2e4055;
+}
+
+a :visited {
+    color: #2e4055;
+}
+
+.column {
+    width: 100%;
+    min-width: 70pt;
+    position: relative;
+}
+
+.table {
+    display: flex;
+    justify-content: space-between;
+    overflow: auto;
+    overflow-x: hidden;
+    height: 90%;
+    position: relative;
+}
+
+.times-column {
+    width: 5%;
+    min-width: 30pt;
+}
+
+.day-cell {
+    border-style: none solid solid none;
+    border-right-color: #666666;
+    border-bottom-color: #CCCCCC;
+    border-width: 1px;
+    height: 60px;
+}
+
+.day-header {
+    border-style: solid solid solid none;
+    border-top-color: #CCCCCC;
+    border-right-color: #CCCCCC;
+    border-bottom-color: #CCCCCC;
+    border-width: 1px;
+    height: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #FFFFFF;
+    background-color: #333333;
+    font-size: 15px;
+    text-align: center;
+    z-index: 4;
+    width: 99%;
+}
+
+.day-wrapper {
+    position: relative;
+}
+
+.times-cell {
+    border-style: none solid solid none;
+    border-right-color: #666666;
+    border-bottom-color: #FFFFFF;
+    border-width: 1px;
+    height: 60px;
+    text-align: right;
+    padding-right: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+
+.times-header {
+    margin-top: 1px;
+    border-style: none solid solid none;
+    border-right-color: #666666;
+    border-bottom-color: #CCCCCC;
+    border-width: 1px;
+    height: 40px;
+}
+
+.event {
+    position: absolute;
+    background-color: lightsteelblue;
+    z-index: 1;
+    width: 80%;
+    left: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.planner-page {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+.planner-header {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.planner-header h1 {
+    font-weight: normal;
+    font-size: 18pt;
+    color: #333333;
+}
+
+.planner {
+    width: 100%;
+    border: #CCCCCC solid thin;
+}
+
+.upcoming-events {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: #CCCCCC solid thin;
+    width: 30%;
+}
+
+.upcoming-events h2 {
+    font-weight: normal;
+}
+
+/*Buttons*/
+/* Dropdown Button */
+.dropbtn {
+    background-color: #333333;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #222222;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}

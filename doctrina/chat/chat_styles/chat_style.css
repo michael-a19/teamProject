@@ -1,0 +1,404 @@
+/**
+*   Styling for the chat section 
+*   Michael Anderson W18032122
+*/
+.other-message {
+    
+    border:1px solid rgb(110, 129, 212);
+}
+:root {
+    --border-color:rgb(34, 34, 34);
+    --left-chat:rgb(121, 140, 223);
+    --right-chat:rgb(103, 231, 114);;
+    --chat-bg:#b6b6b6;
+    --contacts-bg:#F2F5F8;
+    font-family: 'Roboto Mono', monospace;
+    --chat-bar:rgb(184, 184, 184);
+    --hover-color:rgb(121, 121, 121);
+    
+}
+.error-text{
+ display: flex;
+ align-items: center; 
+ color: white; 
+ width: 100%;
+}
+.error-text a{
+    text-decoration: none; 
+    color: white; 
+   }
+#chat-error {
+    width: 80%; 
+    min-height: 50px;
+    height: 50px;
+    color: white;
+    background-color: rgba(255, 0, 0, 0.342);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#chat-page-wrapper {
+    
+    width: 100%;
+    height: 100%;
+   
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#chat-content-wrapper { 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-width: 550px;
+    background-color:var(--contacts-bg);
+    width: 100%;
+    height:100%;
+}
+
+#chat-banner{
+    width: 100%;
+    border-bottom: 1px solid rgb(189, 189, 189);
+    background-color: var(--chat-bg);
+    -webkit-box-shadow: -2px 2px 11px -1px rgba(0,0,0,0.11); 
+    box-shadow: -2px 2px 11px -1px rgba(0,0,0,0.11);
+    display:flex;
+    justify-content: center;
+    align-items: center;  
+}
+
+.selected {
+    background-color:#853f7b;
+}
+
+#contacts-wrapper{    
+    height: 100%;
+    overflow-y: scroll;
+    min-width: 250px;
+    width:30%;
+    background-color: rgb(54,57,63);
+    border-top: 1px solid rgba(119, 119, 119, 0.548);
+    border-left: 1px solid rgb(119, 119, 119, 0.548);
+}
+
+
+#chat-wrapper { 
+    flex-grow: 2;
+    height: 100%;
+    position: relative;
+    background-color: rgb(103, 122, 103);
+    border-top: 1px solid rgb(119, 119, 119, 0.548);
+    border-bottom: 1px solid rgb(34, 34, 34);
+}
+
+/*styling for the box that holds the chat messages*/
+#messages-container{
+    background-color: var(--chat-bg);
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 100px;
+    
+    
+}
+
+.message-wrapper{
+    border-bottom: 1px solid rgb(255, 255, 255);
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 10px 0;
+    padding-bottom: 1.3rem;
+
+
+}
+.message-wrapper:hover{
+    padding-bottom:0.3rem;
+}
+.message-wrapper:hover .message-details-wrapper {
+    display: block;
+    
+}
+.align-left{
+    align-self: flex-start;
+    
+}
+.align-right{
+    align-self: flex-end;
+    
+}
+.message-name {
+    width:60%;
+    font-size: 1.2rem;
+}
+.message-text {
+    width: 60%;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    min-width:150px;
+    -webkit-box-shadow: -2px 2px 11px -1px rgba(75, 75, 75, 0.19); 
+    box-shadow: -2px 2px 11px -1px rgba(73, 73, 73, 0.19);
+
+}
+
+.message-details-wrapper {
+    width: 60%;
+    max-width: 400px;
+    min-width:150px;
+    display: none;
+
+    height: 1rem;
+    color: rgb(43, 42, 42); 
+}
+
+.message-details{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+
+.message-details-right{
+    display: flex;
+    flex-direction:row-reverse;
+    justify-content: space-between;
+    padding: 0 15px;
+    
+}
+.right-text {
+    text-align: right;
+   
+}
+.left-text {
+    text-align: left;
+    
+}
+.my-message {
+    background-color:var(--right-chat);
+    border: 1px solid rgb(88, 197, 97);;
+}
+.other-message {
+    background-color:var(--left-chat);
+}
+
+.visible {
+    display: block;
+}
+.hidden{
+    display: none;
+    
+}
+
+#chat-box { 
+    width: 100%;
+    border-top: 1px solid rgb(255, 255, 255);
+    position: absolute;
+    height: 75px;
+    bottom: 0;
+    background-color: var(--bg-primary);
+
+    align-self:center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.chat-input {
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border: 1px solid rgb(184, 184, 184);
+    margin:0;
+} 
+.chat-button {  
+    
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    width: 75px;
+    height: 50px;
+    cursor: pointer;
+
+}
+.chat-button:hover {  
+    background-color:rgb(121, 121, 121);
+}
+.chat-text-box{
+    flex-grow:2;
+    max-width: 75%;
+    margin-left: 10px;
+    height: 50px;
+    outline: none;
+    font-size: 1.5rem;  
+}
+
+.student-wrapper-button { 
+    border-bottom: 1px solid rgb(34, 34, 34);
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px; 
+    width: 100%;
+    text-decoration: none; 
+    color: var(--text-secondary);
+}
+
+.student-wrapper-button:hover {
+    
+    background-color:#ff7eee;
+    font-size:1.2rem;
+    font-weight: bold;
+    color: var(--bg-primary);
+}
+.student-wrapper{
+   
+    display: flex;
+    align-items: center;
+    min-height: 100px; 
+    width: 100%;
+    min-width: 250px;
+    cursor: pointer;
+}
+
+.student-wrapper:hover {
+    background-color: var(--hover-color);
+    font-size:1.3rem;
+}
+
+.student-name{
+    
+    text-align: center;
+    width: 100%;
+
+}
+
+#students-error {
+    width: 100%; 
+    text-align: center;
+}
+
+#contacts-banner {
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    background-color: var(--bg-primary);
+}
+
+.class-link {
+    display: inline-block; 
+    width: 100%;
+    height: 75px;
+    border-bottom:solid 2px rgb(34, 34, 34);
+    text-align: center;
+    text-decoration: none;
+     display:flex;
+     justify-content: center;
+     align-items: center;
+     font-size: 1.2rem;
+     color: var(--text-secondary);
+}
+.class-link img {
+    margin-left: 10px;
+    
+    
+}
+.online {
+    box-shadow: 0px 0px 3px 1px rgb(51, 255, 0);
+    border-radius: 50px;
+}
+.offline {
+    box-shadow: 0px 0px 3px 1px rgb(238, 20, 20);
+    border-radius: 50px;
+}
+.class-link:hover {
+    font-weight: bold; 
+    background-color: grey;
+}
+#class-details-wrapper {
+        flex-grow: 2;
+        min-width: 300;
+        height: 100%;
+        position: relative;
+        background-color:var(--chat-bg);
+        display: flex; 
+        flex-direction: column; 
+        align-items: center;
+        justify-content: center;
+}
+#expanded-class-details {
+    width: 80%;
+    min-width: 300px;
+    min-height: 80%;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    margin-bottom: 10px;
+    border: rgb(34, 34, 34) solid 1px;
+    
+}
+
+#class-options-wrapper {
+    width: 50%;
+    min-width: 200px;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 20px;
+    padding: 40px 0;
+}
+.class-option {
+    display: inline-block; 
+    width: 80%; 
+    min-width: 200px;
+    background-color: rgb(54,57,63);
+    height: 75px;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    color:var(--text-secondary);
+    font-size: 1.2rem;
+    border: 1px solid rgb(34, 34, 34);
+    margin: 10px 0;
+}
+.class-option:hover {
+    
+    background-color:#ff7eee;
+    font-weight: bold;
+    
+    color: rgb(34, 34, 34);
+}
+
+#class-details,#class-title {
+    padding: 20px;
+}
+#class-details {
+    width: 100%;
+    min-width: 200px;
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-evenly;
+    color: white;
+    background-color: var(--bg-primary);
+    margin: 0;
+}
