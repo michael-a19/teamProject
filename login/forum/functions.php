@@ -1,7 +1,5 @@
 <?php
-/**
-     * function to create the page banner and conditionally create an options menu if user is logged in
-     */
+    // function to create the page banner and conditionally create an options menu if user is logged in
     function createBanner() {
         //check if the user is logged in, if so display the logout dropdown
         $logoutMenu ="";
@@ -42,8 +40,5 @@ LOGOUT;
 BANNER;
         return $banner;
     }
-
-
-
 
 ?>

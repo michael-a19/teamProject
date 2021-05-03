@@ -4,7 +4,8 @@ include 'connect.php';
 include 'header.php';
 
 echo '<h2>Create a topic</h2>';
-// if the user is not signed in OR the user_type_id is not equal to '1'
+// if the user is not signed in OR the user_type_id (type) is not equal to '1'
+// 2 = teacher 1= student
 if(!isset($_SESSION['user_id']) | $_SESSION['type'] != 2)
 {
 	echo 'Sorry, you do not have sufficient rights to access this page.';
@@ -14,7 +15,7 @@ else
 	//the user is signed in
 	if($_SERVER['REQUEST_METHOD'] != 'POST')
 	{
-		// displat the form
+		// display the form
 		// pull the subjects from the database to use in the dropdown menu
 		$sql = "SELECT
 					cat_id,
@@ -80,7 +81,6 @@ else
 		}
 		else
 		{
-
 			// the form has posted, the values need to be posted to the database
 			//insert topics to topics table
 			$sql = "INSERT INTO

@@ -4,7 +4,8 @@ include 'connect.php';
 include 'header.php';
 
 echo '<h2>Create a subject</h2>';
-// if the user is not signed in OR the user_type_id is not equal to '1'
+// if the user is not signed in OR the user_type_id (type) is not equal to '1'
+// 2 = teacher 1= student
 if(!isset($_SESSION['user_id']) | $_SESSION['type'] != 2 )
 {
 	//the user is not an admin
