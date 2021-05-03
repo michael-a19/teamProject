@@ -1,45 +1,33 @@
-/**
-*   Styling for the chat section 
-*   Michael Anderson W18032122
-*/
+
 .other-message {
-    
-    border:1px solid rgb(110, 129, 212);
+    background-color:rgb(180, 180, 180);
 }
 :root {
-    --border-color:rgb(34, 34, 34);
-    --left-chat:rgb(121, 140, 223);
+   
+    --left-chat:rgb(180, 180, 180);
     --right-chat:rgb(103, 231, 114);;
-    --chat-bg:#b6b6b6;
+    --chat-bg:#d3d3d3;
     --contacts-bg:#F2F5F8;
     font-family: 'Roboto Mono', monospace;
     --chat-bar:rgb(184, 184, 184);
     --hover-color:rgb(121, 121, 121);
     
 }
-#chat-error {
-    width: 80%; 
-    min-height: 50px;
-    height: 50px;
-    color: white;
-    background-color: rgba(255, 0, 0, 0.342);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
+
 #chat-page-wrapper {
     
     width: 100%;
     height: 100%;
-   
+
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
 }
 
+/* wrapper for the content of the page - stuff that isn't the nav*/
 #chat-content-wrapper { 
+    border: 2px solid black;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -47,11 +35,14 @@
     background-color:var(--contacts-bg);
     width: 100%;
     height:100%;
+
 }
 
 #chat-banner{
+    /* min-height: 50px; */
     width: 100%;
     border-bottom: 1px solid rgb(189, 189, 189);
+    /* box-shadow: -2px 2px 11px -1px  white; */
     background-color: var(--chat-bg);
     -webkit-box-shadow: -2px 2px 11px -1px rgba(0,0,0,0.11); 
     box-shadow: -2px 2px 11px -1px rgba(0,0,0,0.11);
@@ -61,29 +52,27 @@
 }
 
 .selected {
-    background-color:#853f7b;
+    background-color:blueviolet;
 }
-
-#contacts-wrapper{    
-    height: 100%;
+/* wrapper for contacts side section*/
+#contacts-wrapper{
+    border: 1px solid black;
+    
+     height: 90%;
     overflow-y: scroll;
     min-width: 250px;
     width:30%;
-    background-color: rgb(54,57,63);
-    border-top: 1px solid rgba(119, 119, 119, 0.548);
-    border-left: 1px solid rgb(119, 119, 119, 0.548);
+    background-color: var(--contacts-bg);
 }
-
-
+/* wrapper for the chat section*/
 #chat-wrapper { 
+    border: 1px solid black;
     flex-grow: 2;
     height: 100%;
+    /* height: 90%; */
     position: relative;
     background-color: rgb(103, 122, 103);
-    border-top: 1px solid rgb(119, 119, 119, 0.548);
-    border-bottom: 1px solid rgb(34, 34, 34);
 }
-
 /*styling for the box that holds the chat messages*/
 #messages-container{
     background-color: var(--chat-bg);
@@ -94,8 +83,6 @@
     flex-direction: column;
     align-items: center;
     padding-bottom: 100px;
-    
-    
 }
 
 .message-wrapper{
@@ -118,11 +105,11 @@
 }
 .align-left{
     align-self: flex-start;
-    
+    /* justify-self: left; */
 }
 .align-right{
     align-self: flex-end;
-    
+    /* justify-self: right; */
 }
 .message-name {
     width:60%;
@@ -176,54 +163,41 @@
 }
 .my-message {
     background-color:var(--right-chat);
-    border: 1px solid rgb(88, 197, 97);;
 }
 .other-message {
     background-color:var(--left-chat);
 }
-
+/*style for the input box and stuff at the bottom of page*/
 .visible {
     display: block;
 }
 .hidden{
     display: none;
-    
 }
-
 #chat-box { 
     width: 100%;
     border-top: 1px solid rgb(255, 255, 255);
     position: absolute;
     height: 75px;
     bottom: 0;
-    background-color: var(--bg-primary);
-
-    align-self:center;
+    background-color: var(--chat-bar);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 .chat-input {
-    border-top-left-radius: 50px;
-    border-bottom-left-radius: 50px;
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
+    border-radius: 20px;
     border: 1px solid rgb(184, 184, 184);
-    margin:0;
+    
 } 
 .chat-button {  
-    
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
+    margin: 0 10px;
     width: 75px;
     height: 50px;
     cursor: pointer;
-
 }
 .chat-button:hover {  
-    background-color:rgb(121, 121, 121);
+    background-color:rgb(121, 121, 121); /* add animation and stuff */
 }
 .chat-text-box{
     flex-grow:2;
@@ -234,27 +208,23 @@
     font-size: 1.5rem;  
 }
 
-.student-wrapper-button { 
-    border-bottom: 1px solid rgb(34, 34, 34);
-    
+.student-wrapper-button {
+    border: 1px solid black;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100px; 
     width: 100%;
     text-decoration: none; 
-    color: var(--text-secondary);
+    color: black;
 }
 
 .student-wrapper-button:hover {
-    
-    background-color:#ff7eee;
-    font-size:1.2rem;
-    font-weight: bold;
-    color: var(--bg-primary);
+    background-color:var(--hover-color);
+    font-size:1.3rem;
 }
 .student-wrapper{
-   
+    border: 1px solid black;
     display: flex;
     align-items: center;
     min-height: 100px; 
@@ -264,7 +234,7 @@
 }
 
 .student-wrapper:hover {
-    background-color: var(--hover-color);
+    background-color:(--hover-color);
     font-size:1.3rem;
 }
 
@@ -275,11 +245,26 @@
 
 }
 
+#contact-banner{
+    width: 100%; 
+    height: 50px;
+    border-bottom: solid black 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* #contact-banner-text {
+    text-align: center;
+    width: 100%;
+    display: inline-block; 
+
+} */
+
 #students-error {
     width: 100%; 
     text-align: center;
 }
-
+/*styling for the teacher classes page */
 #contacts-banner {
     display: flex;
     flex-direction: center;
@@ -287,108 +272,105 @@
     align-items: center;
     height: 50px;
     width: 100%;
+    border-bottom: solid 1px black; /******************bg olor*/
+    font-weight: bold;
     font-size: 1.2rem;
-    color: var(--text-secondary);
+    color: white;
     background-color: var(--bg-primary);
 }
-
+.class-item { 
+    /* border:solid 1px black; */
+    width: 100%; 
+    /* min-height: 100px; */
+    height:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+.class-item:hover {
+    font-weight: bold; 
+    background-color: grey;
+}
 .class-link {
     display: inline-block; 
     width: 100%;
     height: 75px;
-    border-bottom:solid 2px rgb(34, 34, 34);
+    border:solid 1px black;
     text-align: center;
     text-decoration: none;
-     display:flex;
-     justify-content: center;
-     align-items: center;
-     font-size: 1.2rem;
-     color: var(--text-secondary);
-}
-.class-link img {
-    margin-left: 10px;
-    
-    
-}
-.online {
-    box-shadow: 0px 0px 3px 1px rgb(51, 255, 0);
-    border-radius: 50px;
-}
-.offline {
-    box-shadow: 0px 0px 3px 1px rgb(238, 20, 20);
-    border-radius: 50px;
-}
-.class-link:hover {
-    font-weight: bold; 
-    background-color: grey;
+    color: black;
+     /* margin: 10px 0 ; */
 }
 #class-details-wrapper {
+
+        border: 1px solid black;
         flex-grow: 2;
         min-width: 300;
-        height: 100%;
+        /* height: 100%; */
+        height: 90%;
         position: relative;
         background-color:var(--chat-bg);
         display: flex; 
         flex-direction: column; 
         align-items: center;
         justify-content: center;
+
+    
 }
 #expanded-class-details {
     width: 80%;
     min-width: 300px;
-    min-height: 80%;
+    height: 100%;
+    /* height: 90%;                              gdgigerger */
     display: flex;
     flex-direction: column; 
     align-items: center;
-    margin-bottom: 10px;
-    border: rgb(34, 34, 34) solid 1px;
     
+    border: black solid 1px;
 }
 
 #class-options-wrapper {
     width: 50%;
     min-width: 200px;
+    /* min-height: 300px; */
     display: flex; 
     flex-direction: column; 
     justify-content: space-evenly;
     align-items: center;
+    /* border: 1px solid black; */
+    background-color: white;
     border-radius: 20px;
     padding: 40px 0;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 .class-option {
     display: inline-block; 
     width: 80%; 
     min-width: 200px;
-    background-color: rgb(54,57,63);
-    height: 75px;
+    background-color: gray;
+    height: 50px;
     display: flex; 
     justify-content: center;
     align-items: center;
     cursor: pointer;
     text-decoration: none;
-    color:var(--text-secondary);
-    font-size: 1.2rem;
-    border: 1px solid rgb(34, 34, 34);
+    color:black;
+    border-radius: 10px;
     margin: 10px 0;
 }
 .class-option:hover {
-    
-    background-color:#ff7eee;
-    font-weight: bold;
-    
-    color: rgb(34, 34, 34);
+    border: black 3px solid;
+
 }
 
 #class-details,#class-title {
-    padding: 20px;
+    margin: 20px;
 }
 #class-details {
-    width: 100%;
+    width: 90%;
     min-width: 200px;
     display: flex; 
     flex-direction: row; 
     justify-content: space-evenly;
-    color: white;
-    background-color: var(--bg-primary);
-    margin: 0;
 }

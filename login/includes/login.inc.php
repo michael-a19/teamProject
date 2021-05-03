@@ -4,8 +4,8 @@
    
     //if user is already logged in redirect to the homepage
     if(isset($_SESSION['user_id'])){
-        //redirect to homepage
-        header('location: ../index.php');
+      //redirect to homepage
+      header('location: ../index.php');
     }
 
     //include database connection object 
@@ -73,11 +73,24 @@
                     $_SESSION['user_forename'] = $res['user_forename'];
                     $_SESSION['user_surname']  = $res['user_surname'];
                     $_SESSION['type']          = $res['user_type_id']; // 2 is a teacher, 1 is a student
-
-                    //redirect to index page after loggin in
-                    header("location: ../index.php");
-                    //prevent code below being ran after redirect which may override this redirect
-                    die();
+                    //set user to online 
+                    try 
+                    {
+                        $setOnline = "UPDATE tp_users SET user_online_status = 1 WHERE user_id = :userID";
+                        $params = array();
+                        $params = array("userID"=>$res['user_id']);
+                        $res = $recset->getRecordSet($setOnline, $params);
+                        //put try catch right around the relocate and shit to check 
+                        //redirect to index page after loggin in
+                        header("location: ../index.php");
+                        //prevent code below being ran after redirect which may override this redirect
+                        die();
+                    }
+                    catch(Exception $e)
+                    {
+                        $error .= "Internal Server Error Can't log user in" . $e->getMessage() . "</br>";
+                    }
+                    
                 }
                 else
                 {

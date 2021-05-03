@@ -3,9 +3,9 @@
      * @author Michael Anderson 
      * @author W18032122
      * 
-     * This script provides the functionality to save a message to the database, called when a user sends a message 
-     * The script gets the message details sent in the body of an ajax request and submits it to the database
-     * The script then returns a json response with a responseType string that tells the chat page to update the messages
+     * This script provides the functionality to delete a chat message
+     * The script gets the chat message id sent in the body of an ajax request, searchs the classChat it belongs to and deletes the message
+     * That script also ensures the user is a teacher before deleting a message as only teachers can delete messages
      */
     $responseMessage ='';
     $responseType ='';
@@ -17,7 +17,7 @@
     {
         $recipientID = $requestArray['requestData']['recipientID'];
         $classID     = $requestArray['requestData']['classID'];
-        $chatMessage = $requestArray['requestData']['message'];
+        $messageID = $requestArray['requestData']['messageID'];
     }
 
     //set the sql prepared statement parameter for the current class ID 
@@ -56,26 +56,25 @@
         $classChatResults =  $classChatResults[0];
 
         $params = array(); 
-        //set parameters for pdo prepared statement to insert a message into database
+        //set the messageID and chat parameters for the pdo prepaired statement
         $params['classChatID'] =  $classChatResults['class_chat_id'];
-        $params['sender'] = $myID;
-        $params['recipient'] = $recipientID;
-        $params['sendDate'] = time(); //set time to unix timestamp
-        $params['seen'] = 0;
-        $params['message'] = $chatMessage;
+        //$params['sender'] = $myID;
+        //$params['recipient'] = $recipientID;
+        
+        $params['messageID'] = $messageID;
 
         //query to insert chat message
-        $sendMessageQuery = "INSERT INTO tp_chat_messages 
-        (class_chat_id,message_sender,message_recipient,message_send_date,message_seen,message_text)
-        VALUES 
-        (:classChatID,:sender,:recipient,:sendDate,:seen,:message)";
-
+        // $sendMessageQuery = "INSERT INTO tp_chat_messages 
+        // (class_chat_id,message_sender,message_recipient,message_send_date,message_seen,message_text)
+        // VALUES 
+        // (:classChatID,:sender,:recipient,:sendDate,:seen,:message)";
+        $deleteMessage = "DELETE FROM tp_chat_messages WHERE class_chat_id = :classChatID AND chat_message_id = :messageID";
         try
         {   
             //insert into database
-            $recset->writeToDB($sendMessageQuery,$params);
-            //set resoinse message
-            $responseMessage ='message sent successfully';
+            $recset->writeToDB($deleteMessage,$params);
+            //set respoinse message
+            $responseMessage ='message deleted successfully';
             //set response type to singal the chat page to update the onscreen messages
             $responseType ='getMessages';
         }
