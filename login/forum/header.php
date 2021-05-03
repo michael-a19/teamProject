@@ -3,7 +3,7 @@
 <!-- HTML Head information -->
 <head>
  	<title>Forum</title>
-	 <!-- Link to CSS style sheet -->
+	 <!-- Link to CSS style sheet and fonts -->
 	<link rel="stylesheet" href="style1.css" type="text/css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
@@ -12,18 +12,19 @@
 <body id="forumBody">
 
 <?php
+//include path to functions
 include("../includes/pagefunctions.inc.php");
+// echo out navigation bar
 echo createNav();
+// echo out banner
 echo createBanner();
 ?>
 
 <script>
 //wrap in onload event to prevent from loading before page finishes 
-//put into folder 
     function getElement(id){
         return document.getElementById(id);
     }
-
     //get drop down button 
     let dropdownButton = getElement("banner-dropdown-button");
     //add event listener to button 
@@ -31,16 +32,14 @@ echo createBanner();
     dropdownButton.addEventListener('click', showDropDown);
 
     function showDropDown(){
-
         //get the drop down menu 
         let dropdownMenu = getElement("dropdown-visibility");
         //toggle the display value of the menu 
         if(dropdownMenu.style.display === "none"){
             dropdownMenu.style.display = 'block';
-        }else {
+        } else {
             dropdownMenu.style.display = "none";
         }
-
     }
 </script> 
 
@@ -48,7 +47,7 @@ echo createBanner();
 	<div id="contentWrapper"> 
 	<div id="optionBar">
 	<!-- Links -->
-		<a class="item" href="forum.php">Home</a>
+		<a class="item" href="forum.php">Forum Home</a>
 		<a class="item" href="create_topic.php">Create a topic</a>
 		<a class="item" href="create_cat.php">Create a subject</a>
 

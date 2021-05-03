@@ -1,8 +1,6 @@
 <?php
 //connect.php
-//setting the session save path
-// ini_set("session.save_path", "/home/unn_w18016014/sessionData");
-//starting the session
+//starting the session if not already started
     if(!isset($_SESSION)) 
     { 
         session_start(); 
