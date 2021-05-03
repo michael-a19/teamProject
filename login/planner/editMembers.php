@@ -86,6 +86,8 @@ if (empty($errors))
     {
         try
         {
+            $dbConn = getConnection();
+            
             $dbConn->beginTransaction();
 
             // SQL query that deletes all members of a class
