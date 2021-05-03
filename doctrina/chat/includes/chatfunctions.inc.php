@@ -103,9 +103,8 @@ MESSAGE;
                 </div>
                     <div id='class-options-wrapper'>
                         <a class='class-option' href='./index.php?class={$class['class_id']}'><span >start class chat</span></a>
-                        <a class='class-option' href=''><span >manage class details</span></a>
-                        <a class='class-option' href=''><span >manage class register</span></a>
-                        <a class='class-option' href=''><span >Create a new class</span></a>
+                        <a class='class-option' href='/doctrina/planner/manageClasses.php'><span >manage class</span></a>
+                        <a class='class-option' href='/doctrina/planner/addClassForm.php'><span >Create a new class</span></a>
                     </div>
             </div>
         ";

@@ -27,7 +27,7 @@
     //define the wrapper to hold the class details 
     $chosenClassDetails = "
                 <div id='class-options-wrapper'>
-                    <a class='class-option' href=''><span >Create a new class</span></a>
+                    <a class='class-option' href='/doctrina/planner/addClassForm.php'><span >Create a new class</span></a>
                 </div>  
                 ";
 
